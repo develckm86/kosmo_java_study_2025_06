@@ -47,9 +47,10 @@ while(true){
 
 ```java
 int[] nums = {11, 22, 33, 44, 55};
-int i = 0;
-while (i < nums.length) {
-    System.out.println(nums[i++]);
+int i = 4; // 배열의 0번째 부터 탐색
+while (i >= 0) {
+    System.out.println(nums[i]);
+    --i;
 }
 ```
 
@@ -87,7 +88,7 @@ do {
 
 ```java
 // 빈칸 채우기
-while (     ) {
+while (   조건문(식)  ) {
     // 반복 내용
 }
 ```
@@ -95,7 +96,7 @@ while (     ) {
 ---
 
 ### 문제 2. 다음 while 문이 **총 몇 번 실행될지** 계산하세요.
-
+3번
 ```java
 int i = 0;
 while (i < 3) {
@@ -107,11 +108,11 @@ while (i < 3) {
 ---
 
 ### 문제 3. 다음 중 무한 반복문으로 올바른 것은?
-
+C
 A. `while(false){}`
-B. `while(1){}`
+B. `while(1){}` 불가능
 C. `while(true){}`
-D. `while(null){}`
+D. `while(null){}` 불가능
 
 ---
 
@@ -122,7 +123,10 @@ int[] nums = {1, 2, 3, 4, 5};
 
 // 역순 출력: 5 4 3 2 1
 ```
-
+i=nums.length-1;
+while(i>=0){
+    System.out.print(nums[i--]+" ");
+}
 ---
 
 
@@ -135,18 +139,20 @@ while(i < arr.length){
     System.out.print(arr[i++] + " ");
 }
 ```
-
+10 20 30
 ---
 
 ### 문제 6. 사용자에게 한 줄 입력을 받아 출력하는 코드를 `Scanner`로 작성해보세요.
-
+Scanner scan=new Scanner(System.in);
+String line=scan.nextLine();
 ---
 
 ### 문제 7. `Thread.sleep(1000);`이 하는 일을 간단히 설명하세요.
-
+thread 를 1초간 쉬게 하는 코드
 ---
 
 ### 문제 8. 무한 루프 안에서 `Thread.sleep(1000);`을 넣는 이유는?
+B
 
 A. 반복 횟수를 줄이기 위해
 B. CPU 점유율을 낮추고 주기 조절을 위해
@@ -156,7 +162,7 @@ D. 오류를 방지하기 위해
 ---
 
 ### 문제 9. 다음 중 컴파일 오류가 발생하는 코드는?
-
+D
 A. `Scanner sc = new Scanner(System.in);`
 B. `Thread.sleep(1000);`
 C. `System.out.println(sc.nextLine());`
@@ -178,7 +184,7 @@ while (i < nums.length) {
     i++;
 }
 ```
-
+10 20 30
 ---
 
 ### 2. 다음 코드에서 `while` 조건식에 들어갈 알맞은 표현을 쓰세요.
@@ -186,7 +192,7 @@ while (i < nums.length) {
 ```java
 int[] scores = {85, 90, 75};
 int i = 0;
-while (        ) {
+while ( i<scores.length ) {
     System.out.println(scores[i]);
     i++;
 }
@@ -204,15 +210,15 @@ while (i <= arr.length) {
     i++;
 }
 ```
-
+인덱스가 없는 5번째를 참조하기 때문에 IndexOutOfBounceException이 발생 =>런터임
 ---
 
 ### 4. 다음 배열을 **역순으로 출력하는 while문**을 완성하세요.
 
 ```java
 int[] nums = {10, 20, 30, 40};
-int i =    ;  // 초기값 작성
-while (    ) {
+int i =  num.length-1  ;  // 초기값 작성
+while (   i>=0 ) {
     System.out.println(nums[i]);
     i--; // 증감식
 }
@@ -230,7 +236,9 @@ while (i < data.length) {
     i++;
 }
 ```
-
+10
+20
+30
 ---
 
 ### 6. 다음 배열에서 **짝수만 출력**하는 코드를 작성하세요.
@@ -240,6 +248,9 @@ int[] nums = {1, 4, 7, 8, 10};
 int i = 0;
 while (i < nums.length) {
     // 조건 추가
+    if(nums[i]%2==0){
+        System.out.println(nums[i]);
+    }
     i++;
 }
 ```
@@ -252,9 +263,12 @@ while (i < nums.length) {
 int[] nums = {3, 6, 9};
 int sum = 0;
 int i = 0;
-while (    ) {
+while ( i<nums.length   ) {
     // 누적
-    i++;
+    sum=sum+nums[i];
+    //sum+=nums[i]; //대입연산자
+    //i++;
+    i+=1;
 }
 System.out.println("총합: " + sum);
 ```
@@ -269,6 +283,7 @@ int count = 0;
 int i = 0;
 while (i < scores.length) {
     // 조건문 추가
+    if(scores[i]>=100) count++;
     i++;
 }
 System.out.println("100 이상: " + count + "개");
@@ -277,13 +292,13 @@ System.out.println("100 이상: " + count + "개");
 ---
 
 ### 9. 다음 코드가 **무한 루프에 빠지는 이유**를 설명하세요.
-
+i의 증감식이 없으면 i는 계속 0이기 때문에 조건식인 i<3 것을 계속 만족하기 때문
 ```java
 int[] arr = {1, 2, 3};
 int i = 0;
 while (i < arr.length) {
     System.out.println(arr[i]);
-    // i++; 가 없다
+    //  i++; 가 없다
 }
 ```
 
@@ -297,11 +312,12 @@ while (i < arr.length) {
 int[] nums = {10, 20, 30};
 int i = 0;
 while (i < nums.length) {
-    System.out.print(nums[i] + ", ");
+    System.out.print(nums[i]);
+    if(i!=nums.length-1) System.out.print(", ")
     i++;
 }
 ```
-
+`10, 20, 30, `
 > 예: 출력이 `10, 20, 30` 으로 끝나게 하려면 어떻게 수정할까?
 
 
