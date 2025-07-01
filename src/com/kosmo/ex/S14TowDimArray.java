@@ -2,7 +2,7 @@ package com.kosmo.ex;
 
 import java.util.Arrays;
 
-public class S14TomDimArray {
+public class S14TowDimArray {
     /*
 # 📘 Java 2차원 배열 수업 정리
 
