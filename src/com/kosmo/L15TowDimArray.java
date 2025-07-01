@@ -5,8 +5,16 @@ import java.util.Arrays;
 public class L15TowDimArray {
     public static void main(String[] args) {
         String [] strs={"안녕","잘가","잘자"};
-        char[][] charTwos={{'안','녕'},{'잘','가'},{'잘','자'}};
-        int [][] scoreTwos={{88,77,99},{100,66,89},{81,100,100}};
+        char[][] charTwos={
+                {'안','녕'},
+                {'잘','가'},
+                {'잘','자'}
+        };
+        int [][] scoreTwos={
+                {88,77,99},
+                {100,66,89},
+                {81,100,100}
+        };
         //3명의 학생의 3과목씩 저장된 배열
         int [][] arr=new int[2][3];
         // {{0,0},{0,0},{0,0}} new int[3][2];

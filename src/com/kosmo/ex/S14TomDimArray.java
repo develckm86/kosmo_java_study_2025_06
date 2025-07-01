@@ -1,5 +1,7 @@
 package com.kosmo.ex;
 
+import java.util.Arrays;
+
 public class S14TomDimArray {
     /*
 # 📘 Java 2차원 배열 수업 정리
@@ -14,6 +16,8 @@ Java에서는 배열 안에 또 다른 배열을 요소로 갖는 구조로 구�
 int[][] array = new int[3][2];
 // 배열 구조: 3행 2열 → {{0,0}, {0,0}, {0,0}}
 ```
+기본형 => 연산
+자료형(배열) => 데이터 관리
 
 ---
 
@@ -56,8 +60,8 @@ int[][] scoreTwos = {
 > **중첩 반복문(중첩 for문)** 사용
 
 ```java
-for (int i = 0; i < 배열.length; i++) {
-    for (int j = 0; j < 배열[i].length; j++) {
+for (int i = 0; i < 배열.length; i++) { //행 탐색
+    for (int j = 0; j < 배열[i].length; j++) { //각 열 탐색
         System.out.print(배열[i][j] + " ");
     }
     System.out.println(); // 한 행 출력 후 줄 바꿈
@@ -85,7 +89,9 @@ for (int i = 0; i < scoreTwos.length; i++) {
 | `String[][] names = new String[2][4];`     | 2행 4열의 문자열 배열 생성 |
 | `double[][] data = new double[4][3];`      | 4행 3열의 실수 배열 생성  |
 | `char[][] chs = { {'가','나'}, {'다','라'} };` | 선언과 동시에 초기화      |
-
+| `chs = { {'가','나'}, {'다','라'} };`     |  변수에 배열생성(x 오류발생)  |
+| `chs = new char[][]{ {'가','나'}, {'다','라'} };`  |  변수에 배열생성  |
+선언과 동시에 초기화 : 선언과 동시에 초기값을 대입한다.(리터럴하게 선언)
 ---
 
 ## ✅ 보충 개념: 가변 배열(Jagged Array)
@@ -112,12 +118,7 @@ int[][] jagged = {
 | 초기화 방식 | 고정형(`new int[행][열]`), 리터럴(`{{...}, {...}}`) |
 | 장점     | 구조적, 행/열 접근이 쉬움                             |
 
----
 
-아래는 **2차원 배열 개념을 쉽게 이해**할 수 있도록 구성한 **Java 문제 5개**입니다.
-난이도는 **입문자 기준**으로 구성했고, **조건문과 중첩 반복문 연습**에 초점을 뒀습니다.
-
----
 
 # ✅ 2차원 배열 입문 문제 (정답 없음)
 
@@ -140,17 +141,35 @@ int[][] scores = {
 출력 예:
 
 ```
-학생1: 90 85 78
-학생2: 88 92 100
+학생1: 90, 85, 78
+학생2: 88, 92, 100
 ...
 ```
-
+for(int i=0; i<scores.length; i++){
+    System.out.print("학생"+(i+1)+":");
+    for(int j=0; j<scores[i].length; j++){
+        System.out.print(scores[i][j]);
+        if(j!=scores[i].length-1){
+            System.out.print(", ");
+        }
+    }
+    System.out.println();
+}
 ---
 
 ### 📘 문제 2. 전체 평균 점수 구하기
 
 배열의 모든 점수의 평균을 구하시오.
 (학생, 과목 상관없이 전체 평균)
+int sum=0;
+int cnt=0;
+for(int i=0; i<scores.length; i++){
+    for(int j=0; j<scores[i].length; j++){
+        sum+=scores[i][j]
+        cnt++;
+    }
+}
+System.out.println("전체 평균"+(sum/cnt))
 
 ---
 
@@ -165,6 +184,13 @@ int[][] scores = {
 3과목 총합: ...
 ```
 
+int [] scoreSum=new int[3]; {0,0,0}
+for(int i=0; i<scores.length; i++){
+    for(int j=0; j<scores[i].length; j++){
+        scoreSum[j]+=scores[i][j];
+    }
+}
+
 ---
 
 ### 📘 문제 4. 90점 이상인 점수만 출력하기
@@ -175,6 +201,13 @@ int[][] scores = {
 ```
 90 100 100 95 90 ...
 ```
+for(int i=0; i<scores.length; i++){
+    for(int j=0; j<scores[i].length; j++){
+        if(scores[i][j]>=90){
+            System.out.print(scores[i][j]+" ")
+        }
+    }
+}
 
 ---
 
@@ -188,7 +221,54 @@ int[][] scores = {
 ```
 
 ---
+int max=0;
+for(int i=0; i<scores.length; i++){
+    for(int j=0; j<scores[i].length; j++){
+        if(max<scores[i][j]){
+            max=scores[i][j];
+        }
+    }
+}
+System.out.println(max)
 
 
 */
+    public static void main(String[] args) {
+        int [][]scores={
+                {55,66,77,88,99},
+                {100,80,70,100,90},
+                {89,99,79,555,59},
+                {10,20,30,40,50}
+        };
+        for(int i=0; i<scores.length; i++){
+            System.out.print("학생"+(i+1)+":");
+            for(int j=0; j<scores[i].length; j++){
+                System.out.print(scores[i][j]);
+                if(j!=scores[i].length-1){
+                    System.out.print(", ");
+                }
+            }
+            System.out.println();
+        }
+        int [] scoreSum=new int[5]; //{0,0,0}
+        for(int i=0; i<scores.length; i++){
+            for(int j=0; j<scores[i].length; j++){
+                scoreSum[j]+=scores[i][j];
+            }
+        }
+        System.out.println(Arrays.toString(scoreSum));
+        for (int i=0; i<scoreSum.length; i++){
+            System.out.println("과목"+(i+1)+"의 합:"+scoreSum[i]);
+        }
+        int max=0;
+        for(int i=0; i<scores.length; i++){
+            for(int j=0; j<scores[i].length; j++){
+                if(max<scores[i][j]){
+                    max=scores[i][j];
+                }
+            }
+        }
+        System.out.println(max);
+
+    }
 }
