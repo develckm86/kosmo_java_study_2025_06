@@ -146,27 +146,30 @@ int add(int a, int b) {
 
 다음 중 클래스에 대한 설명으로 옳지 않은 것은?
 
-A. 클래스는 객체를 생성하기 위한 설계도이다.
-B. 클래스 내부에는 필드와 메서드를 정의할 수 있다.
-C. 클래스 이름은 소문자로 시작하는 것이 자바의 관례이다.
-D. 클래스로부터 객체를 만들기 위해서는 new 키워드를 사용한다.
+A. 클래스는 객체를 생성하기 위한 설계도이다. (O)
+B. 클래스 내부에는 필드와 메서드를 정의할 수 있다.(O)
+C. 클래스 이름은 소문자로 시작하는 것(낙타표기)이 자바의 관례이다.파스칼->대문자로시작 (X)
+D. 클래스로부터 객체를 만들기 위해서는 new 키워드를 사용한다.(O)
 
 ---
 
 ### 문제 2
 
 다음 중 객체 생성 후 해당 필드에 접근하는 코드로 올바른 것은?
+new Dog().name;
 
+Dog dog=new Dog();
+System.out.println(dog.name);
 ```java
 class Dog {
     public String name = "멍멍이";
 }
 ```
 
-A. Dog.name
-B. Dog.name()
-C. new Dog().name
-D. new Dog.name()
+A. Dog.name (X: Dog 설계도 아무것도 아니다. 필드가없다.)
+B. Dog.name() (X)
+C. new Dog().name (O)
+D. new Dog.name() (X : ()함수를 호출할때 사용 )
 
 ---
 
@@ -177,6 +180,7 @@ D. new Dog.name()
 ```java
 class Person {
     String name;
+
     public Person(String name) {
         this.name = name;
     }
@@ -185,11 +189,11 @@ class Person {
 public class Main {
     public static void main(String[] args) {
         Person p = new Person("홍길동");
-        System.out.println(p.name);
+        System.out.println(p.name); //홍길동
     }
 }
 ```
-
+B
 A. null
 B. 홍길동
 C. 에러 발생
@@ -202,10 +206,12 @@ D. this.name
 ### 문제 4
 
 다음 중 생성자에 대한 설명으로 옳지 않은 것은?
-
+B
 A. 생성자는 클래스 이름과 같아야 한다.
 B. 생성자는 반환 타입이 있어야 한다.
-C. 생성자는 객체가 생성될 때 자동으로 호출된다.
+(X : 생성자를 호출하면 객체가 반환되는데 객체의 타입이 클래스 이름과 같다.
+때문에 이름이 반환타입이다.)
+C. 생성자는 객체가 생성될 때 자동으로 호출된다.(객체를 만드려면 생성자를 호출해야한다.)
 D. 생성자를 오버로딩할 수 있다.
 
 ---
@@ -213,7 +219,7 @@ D. 생성자를 오버로딩할 수 있다.
 ### 문제 5
 
 다음 중 private으로 선언된 필드에 접근할 수 있는 경우는?
-
+A
 A. 같은 클래스 내부의 메서드에서
 B. 다른 패키지의 클래스에서
 C. 상속받은 하위 클래스에서
@@ -244,13 +250,13 @@ B.
 A a = new A();
 ```
 
-C.
+C. X
 
 ```java
 int A() {}
 ```
 
-D.
+D. X
 
 ```java
 public void A;
@@ -262,7 +268,7 @@ public void A;
 
 다음 중 메서드 정의로 적절하지 않은 것은?
 
-A.
+A. O
 
 ```java
 public int add(int a, int b) {
@@ -270,7 +276,7 @@ public int add(int a, int b) {
 }
 ```
 
-B.
+B. O
 
 ```java
 public void print() {
@@ -278,7 +284,7 @@ public void print() {
 }
 ```
 
-C.
+C. X
 
 ```java
 public int show(String s) {
@@ -286,7 +292,7 @@ public int show(String s) {
 }
 ```
 
-D.
+D.O
 
 ```java
 public boolean isTrue() {
@@ -303,8 +309,14 @@ public boolean isTrue() {
 ```java
 class Hello {
     String msg;
-
+    pubic Hello(String msg){
+        this.msg=msg;
+        System.out.println(this.msg);
+    }
     // 생성자 작성 필요
+    public static void main(String [] args){
+        Hello hello=new Hello("Hello");
+    }
 }
 ```
 
@@ -314,10 +326,10 @@ class Hello {
 
 다음 중 this 키워드에 대한 설명으로 옳은 것은?
 
-A. 정적(static) 메서드에서만 사용 가능하다.
-B. 클래스의 이름을 가리킨다.
-C. 현재 객체 자신의 필드나 메서드를 가리킨다.
-D. 객체를 비교하기 위한 연산자이다.
+A. 정적(static) 메서드에서만 사용 가능하다.(X)
+B. 클래스의 이름을 가리킨다. (클래스는 설계도  => 설계도는 아무것도 될 수 없다.)
+C. 현재 객체 자신의 필드나 메서드를 가리킨다. (O)
+D. 객체를 비교하기 위한 연산자이다. (X)
 
 ---
 
@@ -335,15 +347,14 @@ class Calculator {
 public class Main {
     public static void main(String[] args) {
         Calculator c = new Calculator();
-        int result = c.add(5, 7);
-        System.out.println(result);
+        int result = c.add(5, 7); //12
+        System.out.println(result); //12
     }
 }
 ```
 
 ---
 
-좋습니다. 아래는 자바 클래스 정의 및 객체 사용 연습을 위한 **직접 클래스 만들기 문제**입니다. 기초적인 수준부터 메서드 활용까지 점차 확장하는 형식으로 구성했습니다. 실습 과제로 활용하기 좋습니다.
 
 ---
 
