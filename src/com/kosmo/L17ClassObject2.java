@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class L17ClassObject2 {
     public static void main(String[] args) {
+        //class A{} //local class => 메서드 내부에서만 사용되고 사라지는 클래스
+        //A a=new A();
         int [] nums={1,2,3,4};
         System.out.println(nums.toString()); // [].toString()
         //toString() 기본값 : 데이터의 타입 + 객체가 저장된 주소 위치
