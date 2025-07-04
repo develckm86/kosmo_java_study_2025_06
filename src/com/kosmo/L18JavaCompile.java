@@ -1,6 +1,6 @@
 package com.kosmo;
 
-public class L18JavaCopile {
+public class L18JavaCompile {
     /*
 
 ## 자바 컴파일 언어 구조 및 클래스 관련 수업 정리

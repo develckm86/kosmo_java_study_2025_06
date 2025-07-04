@@ -1,6 +1,6 @@
 package com.kosmo.ex;
 
-public class S18JavaCopile {
+public class S18JavaCompile {
     /*
 ---
 
