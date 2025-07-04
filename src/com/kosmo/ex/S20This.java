@@ -1,12 +1,47 @@
 package com.kosmo.ex;
 //
+class Animal{ //클래스는 파스칼 규칙
+    String  id;//관리번호;
+    String species;//종
+    String name;//이름
+    int year; //탄생년 !!!!
+    //변수명 메소드명 필드명 : 낙타표기법 (약속)
+    //생성자는 약속된 형태가 존재 : 인텔리제이에서 자동완성 제공-> 마우스오른쪽 => 생성 => 생성자
+    //오버라이딩 : 기존의 toString을 덮어서 다른걸로 바꾼다.
+//    public String toString(){
+//        return "동물 정보 :"+this.id+","+this.name+","+this.year+","+this.species;
+//    }
+
+    public Animal(String id, String species, String name, int year) {
+        this.id = id;
+        this.species = species;
+        this.name = name;
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id='" + id + '\'' +
+                ", species='" + species + '\'' +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                '}';
+    }
+}
 public class S20This {
     //동물원 관리 어플
     public static void main(String[] args) {
         //동물 자료를 관리하는 타입(Animal)을 만들어 주세요,
         //동물의 자료로 관리번호,종,이름,탄생년도를 만들겁니다.
         //곰(검둥이), 토끼(하양이), 두루미(빨간머리) 1마리씩 관리할 예정입니다.
-        //만들어진 정보를 객체를 출력하면 바로 볼 수 있게 해주세요.
+        //만들어진 정보를 객체를 출력하면 바로 정보(필드)를 볼 수 있게 해주세요.
+        Animal bear=new Animal("S1234","곰","검둥이",2024);
+        Animal bear2=new Animal("S1235","곰","점박이",2024);
+        Animal rabit=new Animal("S2222","토끼","하양이",2025);
+        Animal crane=new Animal("S0010","두루미","빨간머리",2015);
+        System.out.println(bear); //com.kosmo.ex.Animal@5f184fc6 : toString 기본값
+
     }
     /*
     * 좋아. 상속과 오버라이드를 아직 다루지 않았으니, 그 부분은 제외하고 지금 수업에 맞게 클래스, 생성자, this에 대한 내용을 “왜 필요한지” 중심으로 정리해줄게.
