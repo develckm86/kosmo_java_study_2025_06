@@ -59,12 +59,20 @@ class Stu {
     String 학번;
     String 이름;
     int 탄생;
+    Stu(){} //생성자
 }
 
 	•	클래스는 새로운 **자료형(Type)**을 만든다고 이해해도 된다.
+	* new Stu() => 자료 (약속)
+	* 호출 == 실행
 
 ⸻
 
+* Stu stu=new Stu();
+*
+* stu.이름="경민";
+* stu.학변="640031";
+*
 2. 왜 생성자가 필요한가?
 	•	new Stu()처럼 객체를 만들면, 필드는 기본값으로 비어 있다.
 	•	그런데 학생을 만들 때마다 이름, 학번, 생년을 일일이 입력해야 한다면 번거롭다.
@@ -80,7 +88,7 @@ Stu3 영주 = new Stu3("a202233", "송영주", 2000);
 
 3. this 키워드는 왜 필요한가?
 	•	생성자나 메서드 안에서 **전달받은 변수(파라미터)**와 클래스의 필드 이름이 같을 때, 둘을 구분할 필요가 있다.
-
+//명시적 :명료하다!,누군가가 알아보기 쉽다!
 Stu3(String 학번, String 이름, int 탄생) {
     this.학번 = 학번;
     this.이름 = 이름;
@@ -112,7 +120,7 @@ public String toString() {
 요약
 
 개념	역할	왜 필요한가?
-클래스	객체를 만들기 위한 설계도	여러 개의 같은 구조의 데이터를 쉽게 만들기 위해
+클래스	객체(자료)를 만들기 위한 설계도	여러 개의 같은 구조의 데이터(자료)를 쉽게 만들기 위해
 생성자	객체 생성 시 데이터를 초기화	객체를 만들자마자 데이터를 넣기 위해
 this	객체 자기 자신을 가리킴	필드와 파라미터를 구분하거나 객체 내부 요소를 명확히 참조하기 위해
 toString()	객체 정보를 문자열로 표현	객체를 사람이 읽을 수 있게 출력하기 위해
@@ -123,24 +131,29 @@ toString()	객체 정보를 문자열로 표현	객체를 사람이 읽을 수 �
 this 키워드 관련 문제
 
 문제 1. 다음 중 this 키워드의 설명으로 올바른 것은?
+C
 
 A. this는 현재 메서드를 의미한다
 B. this는 static 메서드 안에서 사용할 수 있다
+**static => 객체가 아니다. 클래스 변수(메소드),독립체,객체와 관련이 없다.!!
 C. this는 현재 객체 자신을 가리킨다
 D. this는 항상 null이다
 
 ⸻
 
 문제 2. 아래 생성자에서 this.name = name; 코드가 의미하는 것은?
-
+new Book("자바완전정복")
+* Book 으로 만드는 자료에게 처음에 이름은 준다.
+* Book 으로 생성하는 자료에 필드 name을 초기화 한다.
+*
 class Book {
     String name;
 
-    Book(String name) {
+    Book(String name<="자바완전정복") {
         this.name = name;
     }
 }
-
+B
 A. 생성자의 name 값을 무시한다
 B. 파라미터 값을 객체의 name 필드에 저장한다
 C. 에러가 발생한다
@@ -149,15 +162,15 @@ D. 객체를 생성할 수 없다
 ⸻
 
 문제 3. 다음 코드에서 잘못된 부분은?
-
+new User("aa")
 class User {
     String id;
 
     public User(String id) {
-        id = id;
+        this.id = id;
     }
 }
-
+B
 A. 변수명이 잘못되었다
 B. this를 사용하지 않아 객체의 id가 초기화되지 않는다
 C. 생성자는 파라미터를 가질 수 없다
@@ -182,10 +195,11 @@ class Car {
 public class Test {
     public static void main(String[] args) {
         Car c = new Car("Sonata");
-        c.printModel();
+        c.printModel(); //"Sonata"
     }
 }
 
+B
 A. 컴파일 에러
 B. Sonata
 C. null
@@ -194,7 +208,7 @@ D. this.model
 ⸻
 
 문제 5. 다음 중 this 키워드가 사용될 수 없는 경우는?
-
+C
 A. 객체의 필드를 참조할 때
 B. 객체 자신을 다른 메서드에 인자로 넘길 때
 C. static 메서드 안에서 사용할 때
@@ -212,9 +226,10 @@ class Student {
 
     Student(String name, int age) {
         // 여기에 코드를 작성하세요
+        this.name=name;
+        this.age=age;
     }
 }
-
 
 ⸻
 .*/
