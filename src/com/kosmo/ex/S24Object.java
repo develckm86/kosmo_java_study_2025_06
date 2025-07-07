@@ -109,17 +109,17 @@ void call(int a) { } // 오버로딩
 
 ✅ 1~10번: 개념 이해 (객관식/단답)
 	1.	자바에서 클래스를 상속할 때 사용하는 키워드는 무엇인가요?
-① import ② package ③ implements ④ ?
+① import ② package ③ implements ④ ?
 
 ⸻
 
 	2.	부모 클래스의 생성자를 호출할 때 사용하는 키워드는 무엇인가요?
-① this ② super ③ extends ④ override
+① this ② super ③ extends ④ override
 
 ⸻
 
 	3.	다음 중 자바의 최상위 클래스는 무엇인가요?
-① Main ② SuperClass ③ Base ④ ?
+① Main ② SuperClass ③ Base ④ ?
 
 ⸻
 
@@ -132,7 +132,7 @@ void call(int a) { } // 오버로딩
 ⸻
 
 	6.	메서드 오버라이딩을 명확히 하기 위해 사용하는 어노테이션은 무엇인가요?
-① @Super ② @Overload ③ @Override ④ @Virtual
+① @Super ② @Overload ③ @Override ④ @Virtual
 
 ⸻
 
