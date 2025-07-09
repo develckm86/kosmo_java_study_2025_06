@@ -215,7 +215,7 @@ byte b = (byte) i;
 System.out.println(b);
 
 A. 290
-B. -34
+B. 34
 C. 오류 발생
 D. 0
 
