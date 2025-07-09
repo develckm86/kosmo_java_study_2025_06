@@ -119,6 +119,17 @@ C. Outer.Inner in = new Outer().new Inner();
 D. Outer.Inner in = Outer.new Inner();
 
 ⸻
+4.보기 예제
+class Outer {
+    int a = 10; //외부클래스의 인스턴스 변수(필드)
+    static int b=20; //외부클래스의 static 멤버(클래스 변수)
+    static class Inner {
+        void print() {
+            System.out.println(a); //정적 내부 클래스에서 인스턴스 변수를 접근할 수 있나요?
+            System.out.println(b); //정적 내부 클래스에서 static 멤버를 접근할 수 있나요?
+        }
+    }
+}
 
 4. 다음 중 정적(static) 내부 클래스의 특징으로 옳은 것은?
 
@@ -157,11 +168,27 @@ D. Out.In in = new Out.In();
 
 ⸻
 
+7. 보기 예제
+class Outer {
+    int a = 10; //외부클래스의 인스턴스 변수(필드)
+    class Inner {
+        void print() {
+            System.out.println(a); // 내부 클래스에서 인스턴스 변수를 접근할 수 있나요?
+        }
+    }
+    static class SInner {
+        void print() {
+            System.out.println(a); //정적 내부 클래스에서 인스턴스 변수를 접근할 수 있나요?
+        }
+    }
+}
+
+
 7. 외부 클래스의 인스턴스 변수 a에 내부 클래스에서 접근하려면 어떤 조건이 필요한가?
 
 A. 내부 클래스가 static이면 가능
-B. 내부 클래스가 외부 클래스 안에만 선언되면 가능
-C. 외부 클래스의 인스턴스를 통해 생성된 내부 클래스에서만 가능
+B. 내부 클래스가 외부 클래스 안에만 선언되면 가능 (정적 내부 클래스, 내부 클래스 둘다 접근 가능)
+C. 외부 클래스의 인스턴스를 통해 생성된 내부 클래스에서만 가능 (내부 클래스만 가능)
 D. 내부 클래스는 외부 클래스 변수에 접근할 수 없다
 
 ⸻
@@ -209,7 +236,7 @@ D. Outer.Inner i = Outer.new Inner();
 3	C
 4	C
 5	B
-6	B
+6	B,D
 7	C
 8	C
 9	A
