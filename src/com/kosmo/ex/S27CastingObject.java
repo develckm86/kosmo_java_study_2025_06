@@ -3,19 +3,15 @@ package com.kosmo.ex;
 public class S27CastingObject {
     /*
 
-참조형 형변환 수업 정리: L28CastingObject.java
-
-⸻
-
 1. 자바의 자료형 구분
 
 구분	예시	설명
-기본형	int, float, char	값 자체를 저장, 연산 중심
-참조형	String, 배열, 사용자 정의 클래스	객체의 주소(참조) 저장
+기본(원시)형	int, float, char	값 자체를 저장, 연산 중심
+참조(자료)형	String, 배열, 클래스	객체의 주소(참조) 저장
 
-
+//면접 대비!!
+//자료형 데이터와 기본형 데이터의 차이!
 ⸻
-
 2. 자료형(객체형) 데이터 생성 방법
 
 방식	예시
@@ -29,13 +25,16 @@ String h3 = new String("안녕");
 System.out.println(h == h2); // true (문자열 풀 상수 영역)
 System.out.println(h == h3); // false (new로 새 객체 생성)
 
+//문자열을 동등비교할수 있나요??
+//문자열데이터의 저장방식
+
 	•	문자열은 특수하게 + 연산 가능
 	•	String은 char[] 배열 기반이므로 문자와도 결합 가능
 
 ⸻
 
 3. 사용자 정의 클래스 예시
-
+//{name:,birth:}
 class Animal {
     String name;
     int birth;
@@ -69,13 +68,15 @@ dog.tail = "반토막";
 5. 참조형 형변환
 
 (1) Upcasting (자동 형변환)
-
-Animal aniDog = dog;
-
+Dog dog=new Dog();
+Animal aniDog = new Dog();
+Animal aniCat = new Cat();
+// => 타입의 다형성(다양하다) : 객체가 다양한 타입(부모)의 변수로 참조된다.
 	•	Dog → Animal : 자동 형변환
 	•	aniDog는 Animal 타입이므로, name, birth는 접근 가능하지만 tail은 접근 불가
+    * 부모가 자식 형제를 부른다. (upcasting)
 
-(2) Downcasting (강제 형변환)
+(2) Down casting (강제 형변환) : 부모=>형제 자식들 중 한개가 되는 것
 
 Dog dog2 = (Dog) aniDog;
 
@@ -104,6 +105,241 @@ if (aniDog instanceof Cat) {
 형변환 조건	실제 객체 타입이 변환하려는 타입과 일치해야 함
 오류 방지	instanceof로 타입 체크 필요
 참조형 형변환과 기본형 형변환의 차이	참조형은 “주소”를 공유, 기본형은 “값”만 변환
+
+
+⸻
+
+자바 참조형 형변환 문제 (10문제)
+
+⸻
+
+1. 다음 중 업캐스팅이 일어나는 문장은?
+
+A. Dog dog = new Animal();
+B. Animal animal = new Dog();
+C. Dog dog = (Dog) new Animal();
+D. Object obj = (Object) "Hello";
+
+⸻
+
+2. 다운캐스팅이 필요한 경우는?
+
+A. Animal a = new Dog();
+B. Dog d = new Dog();
+C. Dog d = (Dog) new Animal();
+D. Object obj = new String("hi");
+
+⸻
+
+3. 다음 코드에서 런타임 오류가 발생하는 문장은?
+
+Animal a = new Dog();
+Cat c = (Cat) a;
+
+A. 컴파일 오류
+B. 런타임 오류
+C. 정상 실행
+D. 아무것도 출력되지 않음
+
+⸻
+
+4. 다음 중 컴파일은 되지만 **런타임 오류(ClassCastException)**가 발생하는 경우는?
+
+A. Object obj = new Dog();
+B. Dog d = (Dog) obj;
+C. Cat c = (Cat) new Dog();
+D. String s = (String) "Hello";
+
+⸻
+
+5. 다음 중 형변환이 필요 없는 경우는?
+
+A. Dog dog = new Dog();
+B. Animal animal = new Dog();
+C. Object obj = new Animal();
+D. 모두 형변환 없이 가능
+
+⸻
+
+6. 클래스 상속 구조에서 자식 타입을 부모 타입으로 변환하는 것을 무엇이라 하는가?
+
+A. 다운캐스팅
+B. 업캐스팅
+C. 추상화
+D. 다형성
+
+⸻
+
+7. 다음 코드 중 유효한 다운캐스팅은?
+
+Animal a = new Dog();
+Dog d = (Dog) a;
+
+A. 에러 발생
+B. 컴파일 오류
+C. 런타임 오류
+D. 정상 실행
+
+⸻
+
+8. 다음 중 instanceof 연산자의 역할은?
+
+A. 클래스의 상속을 확인한다
+B. 객체가 null인지 확인한다
+C. 객체가 특정 클래스의 인스턴스인지 확인한다
+D. 타입을 자동 변환해 준다
+
+⸻
+
+9. 다음 코드에서 출력 결과는?
+
+Animal a = new Dog();
+System.out.println(a instanceof Dog);
+
+A. true
+B. false
+C. 컴파일 오류
+D. 런타임 오류
+
+⸻
+
+10. 다음 중 정적(static) 내부 클래스는 어떤 특징을 갖는가?
+
+A. 외부 클래스의 인스턴스 없이 생성 가능하다
+B. 항상 외부 클래스의 인스턴스를 필요로 한다
+C. 외부 클래스의 인스턴스 변수에 접근할 수 있다
+D. 반드시 private으로 선언해야 한다
+
+
+⸻
+
+자바 참조형 형변환 문제 (10문제)
+
+⸻
+
+1. 다음 중 업캐스팅이 일어나는 문장은?
+
+A. Dog dog = new Animal();
+B. Animal animal = new Dog();
+C. Dog dog = (Dog) new Animal();
+D. Object obj = (Object) "Hello";
+
+⸻
+
+2. 다운캐스팅이 필요한 경우는?
+
+A. Animal a = new Dog();
+B. Dog d = new Dog();
+C. Dog d = (Dog) new Animal();
+D. Object obj = new String("hi");
+
+⸻
+
+3. 다음 코드에서 런타임 오류가 발생하는 문장은?
+
+Animal a = new Dog();
+Cat c = (Cat) a;
+
+A. 컴파일 오류
+B. 런타임 오류
+C. 정상 실행
+D. 아무것도 출력되지 않음
+
+⸻
+
+4. 다음 중 컴파일은 되지만 **런타임 오류(ClassCastException)**가 발생하는 경우는?
+
+A. Object obj = new Dog();
+B. Dog d = (Dog) obj;
+C. Cat c = (Cat) new Dog();
+D. String s = (String) "Hello";
+
+⸻
+
+5. 다음 중 형변환이 필요 없는 경우는?
+
+A. Dog dog = new Dog();
+B. Animal animal = new Dog();
+C. Object obj = new Animal();
+D. 모두 형변환 없이 가능
+
+⸻
+
+6. 클래스 상속 구조에서 자식 타입을 부모 타입으로 변환하는 것을 무엇이라 하는가?
+
+A. 다운캐스팅
+B. 업캐스팅
+C. 추상화
+D. 다형성
+
+⸻
+
+7. 다음 코드 중 유효한 다운캐스팅은?
+
+Animal a = new Dog();
+Dog d = (Dog) a;
+
+A. 에러 발생
+B. 컴파일 오류
+C. 런타임 오류
+D. 정상 실행
+
+⸻
+
+8. 다음 중 instanceof 연산자의 역할은?
+
+A. 클래스의 상속을 확인한다
+B. 객체가 null인지 확인한다
+C. 객체가 특정 클래스의 인스턴스인지 확인한다
+D. 타입을 자동 변환해 준다
+
+⸻
+
+9. 다음 코드에서 출력 결과는?
+
+Animal a = new Dog();
+System.out.println(a instanceof Dog);
+
+A. true
+B. false
+C. 컴파일 오류
+D. 런타임 오류
+
+⸻
+
+✅ 1. 자바 기본형 형변환 기초 문제 (10문제)
+
+번호	정답
+1	B,D
+2	C
+3	B
+4	C
+5	D
+6	B
+7	D
+8	C
+9	A
+10	A
+
+
+⸻
+
+✅ 2. 자바 참조형 형변환 (Inner/instanceof 제외, 심화 문제 10문제)
+
+번호	정답
+1	A
+2	B
+3	C
+4	B
+5	B
+6	B
+7	A
+8	B
+9	B
+
+
+⸻
+
 
 
 */
