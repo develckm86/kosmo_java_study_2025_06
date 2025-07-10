@@ -1,6 +1,21 @@
 package com.kosmo.ex;
 
 public class S27CastingObject {
+    public static void main(String[] args) {
+        Object o=new Object(); //어떤 객체보다 부모
+        double d=10; //10.0
+        int i=(int)d;
+
+
+        System.out.println((byte)300);
+
+
+
+
+
+        //String s=(String) o;
+        //String s2=(String) new Object();
+    }
     /*
 
 1. 자바의 자료형 구분
@@ -112,26 +127,31 @@ if (aniDog instanceof Cat) {
 자바 참조형 형변환 문제 (10문제)
 
 ⸻
+업캐스팅 : 객체가 부모타입으로 참조되는 것 (자연스러움, upcasting)
+class Animal{}
+class Dog extends Animal{}
+class Cat extends Animal{}
 
 1. 다음 중 업캐스팅이 일어나는 문장은?
 
-A. Dog dog = new Animal();
-B. Animal animal = new Dog();
-C. Dog dog = (Dog) new Animal();
-D. Object obj = (Object) "Hello";
+A. Dog dog = new Animal(); //컴파일 오류
+B. Animal animal = new Dog(); //업캐스팅
+C. Dog dog = (Dog) new Animal(); //A와 같은 상황
+D. Object obj = "Hello"; //업캐스팅
 
 ⸻
 
-2. 다운캐스팅이 필요한 경우는?
+2. 다운캐스팅이 필요한 경우는? 정답없음
 
-A. Animal a = new Dog();
-B. Dog d = new Dog();
-C. Dog d = (Dog) new Animal();
-D. Object obj = new String("hi");
+A. Animal a = new Dog(); //업
+B. Dog d = new Dog(); //자연스러움
+C. Dog d = (Dog) new Animal(); //다운캐스팅인데 런타임오류
+D. Object obj = new String("hi"); //업
 
 ⸻
 
 3. 다음 코드에서 런타임 오류가 발생하는 문장은?
+(Cat) a :a를 Cat 으로 다운 캐스팅할때 오류
 
 Animal a = new Dog();
 Cat c = (Cat) a;
@@ -140,16 +160,16 @@ Cat c = (Cat) a;
 ⸻
 
 4. 다음 중 컴파일은 되지만 **런타임 오류(ClassCastException)**가 발생하는 경우는?
-
+B
 A. Object obj = new Dog();
-B. Dog d = (Dog) obj;
-C. Cat c = (Cat) new Dog();
+B. Dog d = (Dog) obj; //obj가 Dog과 상관없으면
+C. Cat c = (Cat) new Dog();  //형제 객체를 캐스팅할 수 없어서 컴파일 오류
 D. String s = (String) "Hello";
 
 ⸻
 
 5. 다음 중 형변환이 필요 없는 경우는?
-
+A
 A. Dog dog = new Dog();
 B. Animal animal = new Dog();
 C. Object obj = new Animal();
@@ -158,7 +178,7 @@ D. 모두 형변환 없이 가능
 ⸻
 
 6. 클래스 상속 구조에서 자식 타입을 부모 타입으로 변환하는 것을 무엇이라 하는가?
-
+B
 A. 다운캐스팅
 B. 업캐스팅
 C. 추상화
@@ -167,7 +187,7 @@ D. 다형성
 ⸻
 
 7. 다음 코드는 어떻게 실행되나요?
-
+다운캐스팅 D
 Animal a = new Dog();
 Dog d = (Dog) a;
 
@@ -179,8 +199,9 @@ D. 정상 실행
 ⸻
 
 8. 다음 중 instanceof 연산자의 역할은?
+C
 
-A. 클래스의 상속을 확인한다
+A. 클래스의 상속을 확인한다 //객체의 상속을 확인
 B. 객체가 null인지 확인한다
 C. 객체가 특정 클래스의 인스턴스인지 확인한다
 D. 타입을 자동 변환해 준다
@@ -191,7 +212,7 @@ D. 타입을 자동 변환해 준다
 
 Animal a = new Dog();
 System.out.println(a instanceof Dog);
-
+A
 A. true
 B. false
 C. 컴파일 오류
@@ -200,18 +221,11 @@ D. 런타임 오류
 ⸻
 
 10. 다음 중 정적(static) 내부 클래스는 어떤 특징을 갖는가?
-
+A
 A. 외부 클래스의 인스턴스 없이 생성 가능하다
 B. 항상 외부 클래스의 인스턴스를 필요로 한다
 C. 외부 클래스의 인스턴스 변수에 접근할 수 있다
 D. 반드시 private으로 선언해야 한다
-
-
-⸻
-
-좋습니다! 요청하신 대로 Inner 클래스와 instanceof 연산자 관련 내용은 제외하고,
-지금까지 수업한 기반 (Object, String, 사용자 정의 클래스 Animal, Dog, Cat, 업캐스팅/다운캐스팅, 기본형 형변환 포함)만으로 풀 수 있는
-약간 어려운 자료형 형변환 문제 10개를 정리해드립니다.
 
 ⸻
 
@@ -221,10 +235,10 @@ D. 반드시 private으로 선언해야 한다
 
 1. 다음 코드 실행 시 출력 결과는?
 
-Object obj = "기린";
-String name = (String) obj;
+Object obj = "기린";//문자열(String) 객체를 obj(Object)가 참조 업캐스팅
+String name = (String) obj; //**다운캐스팅
 System.out.println(name.length());
-
+A
 A. 2
 B. 컴파일 오류
 C. 런타임 오류
@@ -233,16 +247,16 @@ D. 3
 ⸻
 
 2. 다음 중 업캐스팅으로 올바른 코드는?
-
-A. Dog d = new Animal();
-B. Animal a = new Dog();
-C. Cat c = (Cat) new Animal();
-D. Animal a = (Animal) new Object();
+B
+A. Dog d = new Animal(); 컴파일오류
+B. Animal a = new Dog(); 업캐스팅
+C. Cat c = (Cat) new Animal(); 런타임오류
+D. Animal a = (Animal) new Object(); 런타임오류
 
 ⸻
 
 3. 다음 코드에 대한 설명으로 옳은 것은?
-
+C
 Animal a = new Animal();
 Dog d = (Dog) a;
 
@@ -260,11 +274,13 @@ class Animal {
 }
 
 class Dog extends Animal {
+    new Dog()=>this.bark(),super.eat()
+
     void bark() {}
 }
 
-Animal a = new Dog();
-
+Animal a = new Dog(); //{ this[Dog].bark(), super[Animal].eat() }
+B
 A. a.bark();
 B. a.eat();
 C. a.run();
@@ -273,7 +289,7 @@ D. 모두 가능
 ⸻
 
 5. 다음 코드에서 name의 출력 결과는?
-
+B
 Animal a = new Dog();
 a.name = "코에";
 System.out.println(a.name);
@@ -286,16 +302,16 @@ D. Dog 클래스에 name이 없으므로 오류
 ⸻
 
 6. 다음 중 강제 형변환이 필요한 문장은?
-
+B,C
 A. int i = 100; long l = i;
 B. long l = 10000000000L; int i = (int) l;
-C. double d = 10; int i = d;
+C. double d = 10; int i = d;//컴파일 오류지만 강제 형변환이 필요
 D. String s = (String) "안녕";
 
 ⸻
-
+//처음부터 문자열 데이터인 경우 !!!
 7. 다음 중 Object 타입으로 선언된 변수를 String으로 안전하게 캐스팅할 수 있는 문장은?
-
+A
 A. Object obj = "hello"; String s = (String) obj;
 B. Object obj = new Animal(); String s = (String) obj;
 C. Object obj = 42; String s = (String) obj;
@@ -308,18 +324,18 @@ D. Object obj = null; String s = (String) obj;
 int i = 300;
 byte b = (byte) i;
 System.out.println(b);
-
+B
 A. 300
-B. -56
+B. 44
 C. 컴파일 오류
 D. 예외 발생
 
 ⸻
 
 9. 다음 코드에서 d가 정상적으로 출력되려면 어떤 조건이 필요한가?
-
-Animal a = getAnimal();
-Dog d = (Dog) a;
+B
+Animal a = getAnimal(); ///???? new Dog()
+Dog d = (Dog) a; //처음부터 객체는 new Dog()
 System.out.println(d.tail);
 
 A. a는 Object여야 한다
@@ -330,11 +346,11 @@ D. 어떤 타입이든 상관 없다
 ⸻
 
 10. 다음 중 자료형 형변환이 전혀 발생하지 않는 문장은?
-
+A
 A. Dog d = new Dog();
-B. Animal a = new Dog();
-C. Object o="hi"; String s = (String) o;
-D. int i = (int) 3.14;
+B. Animal a = new Dog(); 업캐스팅
+C. Object o="hi"; 업캐스팅 String s = (String) o; 다운캐스팅
+D. int i = (int) 3.14; 강제형변환
 
 ⸻
 

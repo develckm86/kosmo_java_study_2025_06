@@ -1,8 +1,32 @@
 package com.kosmo.ex;
 
-public class S28InnerClass {
-    /*
+public class S28InnerClass { //외부클래스
+    //S28InnerClass$Nested
+    int a=10;
+    class Nested{ //중첩 클래스
+        int a=10;
+        void mult(){
+            this.a++; //new Nested().a //중첩클래스가 객체일때는 무조건 외부클래스가 객체일때기 때문
+            S28InnerClass.this.a++; //new S28InnerClass().a
+        }
+    }
+    //외부클래스 내부에서 특정 타입(외부클래스에서만 사용하는.. )이 필요한때 작성
 
+    void sum(){
+        Nested n=new Nested(); //보통 클래스와 같다.
+    }
+
+    //외부 : static은 독립적인 존재 (S28InnerClass의 외부)
+    public static void main(String[] args) {
+        ++new S28InnerClass().a;
+        //++this.a; //S28InnerClass의 내부에 작성된 main이지만 static 은 독립적이기 때문에 필드로 접근 불가
+
+        //S28InnerClass.Nested nested=new Nested();
+        //S28InnerClass.Nested nested=new S28InnerClass.Nested();
+        S28InnerClass.Nested nested=new S28InnerClass().new Nested();
+
+    }
+    /*
 ⸻
 
 1. 내부 클래스란?
