@@ -7,7 +7,6 @@ class Out{
     //new Out() {a:10, in: new Int()}
     static int b=20;
     //{a:10, in: new Int(),b:20} : (xxxxx)
-
     class In{ //inner(nested) class :내부클래스
         //내부클래스 : class 내부에서만 사용하려고 만든 자료형
         //Out.java => Out.class
