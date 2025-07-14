@@ -2,13 +2,28 @@ package com.kosmo.ex;
 
 public class S29AbstractClassInterface {
     /*
-
 자바 추상 클래스(Abstract Class)와 추상 메서드(Abstract Method)
+//객체에 대한 중간단계 미완성 설계
+
+abstract class A{
+    abstract (접근지정자, private 제외) int a(); //다른 class가 사용 못하는 메서드는 추상으로 정의할 필요없음
+} new A(); x
+
+//객체에 대한 완전한 설계
+class B extends A{
+    @Override
+    int a(){
+        본문,바디
+    }
+}
+new B();
+
 
 1. 추상 클래스란?
 	•	abstract 키워드를 사용하는 클래스
 	•	불완전한(미완성된) 설계도 역할
 	•	직접 객체 생성 불가
+	•   클래스와 완정 동일한데 추상메서드만 작성 가능
 
 new AbstractClass(); // 에러
 
@@ -88,14 +103,40 @@ public class L30Abstract {
 
 ✅ 핵심 요약
 
-항목	설명
-추상 클래스	객체 생성 불가. 추상 메서드 포함 가능. 일반 필드/메서드도 포함 가능
-추상 메서드	구현(본문)이 없는 메서드. 자식 클래스에서 반드시 오버라이딩 필요
-상속 목적	자식 클래스에게 메서드 구현을 강제함
-오버라이딩	자식 클래스가 부모의 메서드를 재정의해서 사용
-물론입니다. 자바의 추상 클래스, 추상 메서드, 인터페이스 관련 개념을 확인할 수 있는 객관식 문제 10개를 아래에 구성해 드립니다.
-
+항목	                설명
+추상 클래스	        객체 생성 불가. 추상 메서드 포함 가능. 일반 필드/메서드도 포함 가능
+추상 메서드	        구현(본문)이 없는 메서드. 자식 클래스에서 반드시 오버라이딩 필요
+상속 목적	            자식 클래스에게 메서드 구현을 강제함
+오버라이딩	            자식 클래스가 부모의 메서드를 재정의해서 사용
 ⸻
+
+
+//정수(int) 타입의 최대값(고정값) Integer.MAX_VALUE; => 최대값,  MATH.PI
+
+interface A{
+    //void a(){} // 오류
+    [public static final ]int i=10;//자동으로 클래스 변수로 변경 (설계도와 상관없는 독립체 == static),필드를 가질 수 없다.
+    [abstract public] void a(); // public 한 추상 메서드만 작성가능
+
+}
+interface B{
+    int i=20;
+    void a();
+}
+//extends : 부모도 객체가 되어서 자식에게 포함된다.  new Child(); <= extends 한 부모객체가 포함 (부모간의 우선순위를 위해 다중상속 불가)
+//implements : 보모의 타입만 사용(부모는 객체가 되지 않음,다중구현이 가능)
+//인터페이스가 다중구현이 가능한이유 : 필드가 없는 추상메서드로 이루어진 타입이기 때문입니다.
+class C implements A,B{
+    void sum(){
+        //++super.i; //다중구현시 부모의 필드가 누구의 것인지 알수 없음
+    }
+    @Override
+    public void a(){ //A.a() , B.a() => 둘다 구현이 안되어 있어서 상관없다.
+
+    }
+}
+
+
 
 
 자바 인터페이스 (Interface) 정리
@@ -178,20 +219,26 @@ public class L31Interface {
 
 다음 중 abstract class에 대한 설명으로 옳은 것은?
 
-A. abstract 클래스는 객체를 생성할 수 있다
-B. abstract 클래스는 반드시 추상 메서드를 포함해야 한다
-C. abstract 클래스는 일반 메서드와 필드를 가질 수 있다
-D. abstract 클래스는 인터페이스만 상속할 수 있다
+A. abstract 클래스는 객체를 생성할 수 있다 //없다
+B. abstract 클래스는 반드시 추상 메서드를 포함해야 한다 //반드시는 아님(사용가능)
+C. abstract 클래스는 일반 메서드와 필드를 가질 수 있다 //(O)
+D. abstract 클래스는 인터페이스만 상속할 수 있다 // 인터페이스는 구현, 추상클래스간 상속가능
+
+abstract class A{
+    abstract void a(); //<=??????
+}
+abstract class C extends A{}
+
 
 ⸻
 
 문제 2
 
 추상 메서드에 대한 설명으로 틀린 것은?
-
+D
 A. 메서드 바디({})를 가질 수 없다
 B. 자식 클래스에서 반드시 오버라이딩해야 한다
-C. abstract가 붙으면 클래스도 무조건 추상 클래스여야 한다
+C. 메서드에 abstract 가 붙으면 클래스도 무조건 추상 클래스여야 한다 (O)
 D. private abstract 메서드는 정의할 수 있다
 
 ⸻
@@ -199,7 +246,7 @@ D. private abstract 메서드는 정의할 수 있다
 문제 3
 
 다음 중 추상 클래스를 올바르게 정의한 코드는?
-
+C
 A. abstract class A { void show(); }
 B. class A { abstract void show(); }
 C. abstract class A { abstract void show(); }
@@ -211,10 +258,10 @@ D. abstract void show();
 
 다음 중 추상 클래스와 인터페이스의 공통점이 아닌 것은?
 
-A. 객체를 직접 생성할 수 없다
-B. 모두 추상 메서드를 가질 수 있다
-C. 생성자를 정의할 수 있다
-D. 자식 클래스에서 메서드 구현을 강제할 수 있다
+A. 객체를 직접 생성할 수 없다 O
+B. 모두 추상 메서드를 가질 수 있다 O
+C. 생성자를 정의할 수 있다  X => 인터페이스는 필드를 작성못함=>생성자도 작성불가
+D. 자식 클래스에서 메서드 구현을 강제할 수 있다 O=>추상메서드 작성가능
 
 ⸻
 
@@ -223,10 +270,12 @@ D. 자식 클래스에서 메서드 구현을 강제할 수 있다
 다음 코드의 실행 결과는?
 
 abstract class Parent {
+    int a=20;
     abstract void greet();
 }
 
 class Child extends Parent {
+    int a=10;
     void greet() {
         System.out.println("Hello");
     }
@@ -236,8 +285,10 @@ public class Main {
     public static void main(String[] args) {
         Parent p = new Child();
         p.greet();
+        System.out.print(p.a);
     }
 }
+A
 
 A. Hello
 B. 컴파일 에러
@@ -249,7 +300,7 @@ D. 아무 출력 없음
 문제 6
 
 다음 중 인터페이스의 특징으로 옳은 것은?
-
+C
 A. 생성자를 정의할 수 있다
 B. 인스턴스 필드를 가질 수 있다
 C. 인터페이스는 다중 구현이 가능하다
@@ -260,7 +311,7 @@ D. 인터페이스 메서드는 모두 private이다
 문제 7
 
 인터페이스에 선언된 메서드는 자동으로 어떤 키워드를 갖는가?
-
+C
 A. private static
 B. public final
 C. public abstract
@@ -271,18 +322,19 @@ D. protected abstract
 문제 8
 
 다음 중 인터페이스에서 선언 가능한 것은?
+A, C
 
-A. int x = 10;
-B. private int y;
-C. abstract void run();
-D. static void method();
+A. int x = 10; //=>불가능하지만 바꿔서 정의함 public static final int x=10;
+B. private int y; //private x
+C. abstract void run();//0
+D. static void method(); // X static 본문이 존재야함
 
 ⸻
 
 문제 9
 
 다음 중 올바르게 추상 클래스를 상속하고 추상 메서드를 구현한 것은?
-
+B
 A.
 
 abstract class Animal {
@@ -324,7 +376,7 @@ class Dog extends Animal {
 
 문제 10
 
-다음 중 자식 클래스에서 반드시 구현해야 하는 경우는?
+다음 중 자식 클래스에서 반드시 구현해야 하는 경우는? D
 
 A. 부모 클래스에 private 메서드가 있을 때
 B. 부모 클래스에 static 메서드가 있을 때
@@ -333,5 +385,33 @@ D. 부모 클래스에 abstract 메서드가 있을 때
 
 ⸻
 
-1번: C, 2번: D, 3번: C, 4번: C, 5번: A, 6번: C, 7번: C, 8번: A, 9번: B, 10번: D*/
+1번: C, 2번: D, 3번: C, 4번: C, 5번: A, 6번: C, 7번: C, 8번: A, C, 9번: B, 10번: D*/
+
+    public static void main(String[] args) {
+        Test22 t=new ChildTest22();
+        t.a(); //"안녕";
+        System.out.println(t.a);
+        //오바라이드 : 메모리에 메서드 실행 테이블(목록)이 존재하는데 자식이 부모의 메서드를 재정의하면 부모의 목록을 제거
+    }
+}
+interface Testeable{
+    int a=10;
+    abstract void a();
+    static void b(){ } // ???static 독립체 (데이터로 존재->본문이 존재해야함!!)
+
+}
+abstract class Test22{
+    int a=20;
+    //abstract void b();
+    public void a(){
+        System.out.println("잘가~");
+    };
+}
+class ChildTest22 extends Test22{
+    int a=10;
+    @Override
+    public void a() {
+        super.a();
+        System.out.println("안녕");
+    }
 }
