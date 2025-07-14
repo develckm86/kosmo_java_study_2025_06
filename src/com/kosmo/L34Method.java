@@ -35,7 +35,7 @@ public class L34Method {
             //if(!isNum) break;
             if(!isNum) return false;
         }
-        return isNum;
+        return isNum; //50~
     }
     static public void sum(int []arr){
         return;//다음 코드 작성 불가
