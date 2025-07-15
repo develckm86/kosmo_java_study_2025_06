@@ -156,7 +156,7 @@ return	메서드를 종료하고 결과 반환
 ⸻
 
 1. 다음 중 sum 메서드의 리턴 타입으로 올바른 것은?
-
+C
 public static ??? sum(int a, int b) {
     return a + b;
 }
@@ -169,7 +169,7 @@ D. boolean
 ⸻
 
 2. 다음 중 void 메서드의 특징으로 올바른 것은?
-
+B
 A. 값을 반드시 리턴해야 한다
 B. 값을 리턴할 수 없다
 C. 오직 한 번만 호출할 수 있다
@@ -179,7 +179,7 @@ D. static 메서드만 가능하다
 ⸻
 
 3. 아래 메서드를 호출했을 때 출력 결과는?
-
+"Hello, Java"
 public static void greet(String name) {
     System.out.println("Hello, " + name);
 }
@@ -195,13 +195,27 @@ public static void main(String[] args) {
 4. 매개변수로 정수 배열을 받아 배열의 합계를 반환하는 메서드를 작성하시오.
 
 ( 직접 작성)
+class A{
+    int arraySum(int [] arr){
+           int arraySum=0;
+           for(int i=0; i<arr.length; i++){
+                arraySum+=arr[i];
+           }
+           return arraySum;
+    }
 
+    public static void main(String[]args){
+        int [] arr={10,9,11,0,-20}
+        A a=new A();
+        int sum=a.arraySum(arr);
 
+    }
+}
 
 ⸻
 
 5. 다음 코드의 출력 결과는?
-
+B
 public static int multiply(int x, int y) {
     return x * y;
 }
@@ -220,7 +234,7 @@ D. 컴파일 오류
 정답: 1.C, 2.B, 3.Hello, Java,
 4.public static int sum(int[] arr) {
     int total = 0;
-    for (int i : arr) {
+    for (int i; i<arr.length; i++) {
         total += i;
     }
     return total;
