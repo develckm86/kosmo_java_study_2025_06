@@ -2,6 +2,7 @@ package com.kosmo;
 
 public class L40String {
     public static void main(String[] args) {
+
         //문자열
         String s="안녕"; //문자열
         char [] s2={'안','녕'}; //"안녕" 을 선언하면 생성되는 데이터

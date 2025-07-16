@@ -69,8 +69,6 @@ for (int i = 0; i < str.length(); i++) {
 메서드	                                설명	                                예시
 length()	                            문자열 길이 반환	                    "hello".length() → 5
 charAt(int index)	                    특정 위치의 문자 반환	                "java".charAt(1) → 'a'
-substring(int begin)	                시작 인덱스부터 끝까지 잘라냄	            "abcdef".substring(2) → "cdef"
-substring(int begin, int end)	        범위 지정해 부분 문자열 추출	            "abcdef".substring(1, 4) → "bcd"
 equals(String s)	                    문자열 비교 (내용 기준)	                "hi".equals("hi") → true
 equalsIgnoreCase(String s)	            대소문자 무시 비교	                    "hi".equalsIgnoreCase("HI") → true
 indexOf(String s)	                    처음 나오는 위치 반환	                "hello".indexOf("l") → 2
@@ -80,13 +78,15 @@ endsWith(String s)	                    특정 문자로 끝나는지 검사	    
 split(String regex)	                    구분자로 나누어 배열 반환	                "a,b,c".split(",") → [a, b, c]
 contains(String s)	                    문자열 포함 여부	                    "hello".contains("el") → true
 
-새로운 문자열을 생성하는 메서드
+✅ 새로운 문자열을 생성하는 메서드
+
 메서드	                                설명	                                예시
 toUpperCase()	                        대문자로 변환	                        "java".toUpperCase() → "JAVA"
 toLowerCase()	                        소문자로 변환	                        "JAVA".toLowerCase() → "java"
 replace(old, new)	                    문자열 치환	                        "apple".replace("p", "b") → "abble"
 trim()	                                앞뒤 공백 제거	                        " hello ".trim() → "hello"
-
+substring(int begin)	                시작 인덱스부터 끝까지 잘라냄	            "abcdef".substring(2) → "cdef"
+substring(int begin, int end)	        범위 지정해 부분 문자열 추출	            "abcdef".substring(1, 4) → "bcd"
 
 
 ⸻
@@ -139,7 +139,159 @@ str.substring(1, 4); // "ell"
 List<String> list = List.of("a", "b", "c", "d");
 list.subList(1, 3); // ["b", "c"]
 
+좋습니다! 아래는 사용하신 수업 범위에 맞춰 재구성한 문자열(String) 관련 문제 20제입니다.
+	•	✅ 불변성, 리터럴, 연산 우선순위, 참조 비교, charAt 등
+	•	✅ String의 유용한 메서드 중심 문제 10제 포함
+	•	❌ StringBuffer, 상수 풀 설명 제외
 
+⸻
 
+✅ 문자열 개념 및 연산 관련 문제 (총 10문제)
+
+📘 기본 개념 (1~5)
+
+	1.	자바에서 문자열은 어떤 자료형인가?
+A. char[]
+B. String
+C. StringBuilder
+D. List
+
+	2.	다음 중 String의 특징으로 올바른 것은?
+A. 문자열은 가변이다
+B. 문자열은 참조형이지만 값처럼 다룬다 // 값==기본형
+C. 문자열은 기본형이다
+D. 문자열은 항상 new로 생성해야 한다
+
+	3.	문자열 + 연산의 결과는 어떤 객체인가?
+A. 같은 객체
+B. 기존 문자열을 수정한 객체
+C. 새로운 문자열 객체
+D. StringBuilder 객체
+
+    4.  다음 중 문자열에서 문자를 하나씩 꺼내는 데 사용할 수 있는 메서드는?
+A. substring()
+B. charAt()
+C. contains()
+D. split()
+
+	5.	다음 중 문자열의 불변성 설명으로 옳은 것은?
+A. 문자열은 내용을 수정할 수 있다
+B. 문자열을 더하면 원본 문자열이 바뀐다
+C. 문자열 연산 시 기존 문자열은 유지되고 새 문자열이 생성된다
+D. 문자열은 내부적으로 리스트로 관리된다
+
+⸻
+
+📙 참조 비교와 문자열 리터럴 (6~10)
+
+	6.	다음 코드의 출력 결과는?
+
+String a = "hello";
+String b = "hello";
+System.out.println(a == b);
+
+A. true
+B. false
+C. 컴파일 에러
+D. 예외 발생
+
+	7.	다음 코드의 출력 결과는?
+
+String a = "hi";
+String b = new String("hi");
+System.out.println(a == b);
+
+A. true
+B. false
+C. 예외
+D. null
+
+	8.	문자열을 비교할 때 == 대신 equals()를 써야 하는 이유는?
+A. equals가 더 빠르기 때문에
+B. 문자열 내용 비교는 equals로 해야 하기 때문에
+C. ==은 null을 허용하지 않기 때문에
+D. equals는 기본형만 가능하기 때문에
+
+	9.	다음 중 문자열 연결 결과가 "hello42"가 되는 것은?
+A. "hello" + 4 + 2
+B. "hello" + 4 + "2"
+C. "hello" + "4" + "2"
+D. 모두 맞다
+
+	10.	문자열 + 숫자 연산에서 우선순위가 높은 것은?
+A. 산술 연산
+B. 문자열 연결
+C. 괄호
+D. 비교 연산
+
+⸻
+
+✅ 문자열 유용한 메서드 관련 문제 (총 10문제)
+
+	11.	"banana".length()의 결과는?
+A. 5
+B. 6
+C. 7
+D. 오류
+
+	12.	"hello".charAt(1)의 결과는?
+A. 'e'
+B. "e"
+C. 'h'
+D. 'l'
+
+	13.	"apple".substring(1, 4)의 결과는?
+A. "ppl"
+B. "pple"
+C. "ple"
+D. "app"
+
+	14.	"hello".contains("ll")의 결과는?
+A. true
+B. false
+C. 오류
+D. “ll”
+
+	15.	"java".toUpperCase()의 결과는?
+A. "Java"
+B. "JAVA"
+C. "java"
+D. 오류
+
+	16.	"hi there".indexOf("t")의 결과는?
+A. 2
+B. 3
+C. 4
+D. 1
+
+	17.	"hello".replace("l", "x")의 결과는?
+A. "hexxo"
+B. "hello"
+C. "hexx"
+D. "hxxlo"
+
+	18.	"  hello  ".trim()의 결과는?
+A. "hello"
+B. "  hello"
+C. "hello  "
+D. "  hello  "
+
+	19.	"abcde".substring(2)의 결과는?
+A. "cd"
+B. "cde"
+C. "de"
+D. "bcde"
+
+	20.	"apple".contains("A")의 결과는?
+A. true
+B. false
+C. 오류
+D. null
+
+⸻
+
+정답:
+	1.	B   2. B   3. C   4. B   5. C   6. A   7. B   8. B   9. D   10. B
+	11.	B   12. A   13. A   14. A   15. B   16. B   17. A   18. A   19. B   20. B
 */
 }
