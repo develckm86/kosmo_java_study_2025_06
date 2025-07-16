@@ -62,7 +62,9 @@ public class L39Map {
             System.out.println(key+":::"+value);
         }
         //
-
+        System.out.println(person.remove("안녕"));
+        System.out.println(person.remove("name"));
+        System.out.println(person);
     }
 }
 

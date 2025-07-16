@@ -28,6 +28,8 @@ public class L37Collections {
         System.out.println(list.remove("10")); //데이터를 찾아서 지움(실패가능)
         System.out.println(list.remove("10.0")); //데이터를 찾아서 지움(실패가능)
         System.out.println(list.remove(0));//인덱스로 지울때는 삭제한 대상이 출력
+//        System.out.println(list.remove(100));//인덱스로 지울때는 삭제한 대상이 출력
+
         System.out.println(list);
         System.out.println(list.contains(10.0));
         System.out.println(list.contains(11));
