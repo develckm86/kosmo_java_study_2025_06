@@ -1,11 +1,7 @@
 package com.kosmo.ex;
 
 public class S35String {
-    /*
-좋습니다! 아래는 L40String.java에서 다룬 내용을 중심으로 학생용 수업 정리입니다.
-문자열의 개념, 메모리 구조, 연산 특성, 배열과의 관계, 그리고 유용한 메서드까지 흐름에 맞춰 깔끔하게 정리했습니다.
-
-⸻
+    /*⸻
 
 ✅ Java 문자열(String) 수업 정리
 
@@ -79,21 +75,18 @@ equals(String s)	                    문자열 비교 (내용 기준)	          
 equalsIgnoreCase(String s)	            대소문자 무시 비교	                    "hi".equalsIgnoreCase("HI") → true
 indexOf(String s)	                    처음 나오는 위치 반환	                "hello".indexOf("l") → 2
 lastIndexOf(String s)	                마지막 위치 반환	                    "hello".lastIndexOf("l") → 3
+startsWith(String s)	                특정 문자로 시작하는지 검사	            "java".startsWith("j") → true
+endsWith(String s)	                    특정 문자로 끝나는지 검사	                "test.txt".endsWith(".txt") → true
+split(String regex)	                    구분자로 나누어 배열 반환	                "a,b,c".split(",") → [a, b, c]
+contains(String s)	                    문자열 포함 여부	                    "hello".contains("el") → true
+
+새로운 문자열을 생성하는 메서드
+메서드	                                설명	                                예시
 toUpperCase()	                        대문자로 변환	                        "java".toUpperCase() → "JAVA"
 toLowerCase()	                        소문자로 변환	                        "JAVA".toLowerCase() → "java"
 replace(old, new)	                    문자열 치환	                        "apple".replace("p", "b") → "abble"
 trim()	                                앞뒤 공백 제거	                        " hello ".trim() → "hello"
-split(String regex)	                    구분자로 나누어 배열 반환	                "a,b,c".split(",") → [a, b, c]
-startsWith(String s)	                특정 문자로 시작하는지 검사	            "java".startsWith("j") → true
-endsWith(String s)	                    특정 문자로 끝나는지 검사	                "test.txt".endsWith(".txt") → true
-contains(String s)	                    문자열 포함 여부	                    "hello".contains("el") → true
 
-
-⸻
-
-이후에 StringBuffer와 StringBuilder를 비교하면서 가변 문자열, 성능 차이, append/insert/delete 등을 다루면 더 풍성한 수업이 될 거예요.
-
-원하시면 StringBuffer/StringBuilder 요약도 바로 드릴게요!
 
 
 ⸻
