@@ -11,14 +11,14 @@ import java.awt.*;
 	•	100 이상일 때 메시지 출력 (JOptionPane)
 	•	학습 포인트: 상태 관리, 조건 분기, 레이블 갱신
 */
-public class S01NumberUp extends JFrame {
+public class S01Q01NumberUp extends JFrame {
     private JButton btn;
     private JButton resetBtn;
     private JLabel label;
     private JPanel p;
     private int num;
     private final int lastNum=10;
-    public S01NumberUp(){
+    public S01Q01NumberUp(){
         this.p=new JPanel();
         this.p.setLayout(new FlowLayout());
         this.resetBtn=new JButton("리셋");
@@ -48,6 +48,6 @@ public class S01NumberUp extends JFrame {
     }
 
     public static void main(String[] args) {
-        new S01NumberUp();
+        new S01Q01NumberUp();
     }
 }

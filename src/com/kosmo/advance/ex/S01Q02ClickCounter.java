@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 	•	수를 출력하는 라벨
 
 */
-public class S01ClickCounter extends JFrame {
+public class S01Q02ClickCounter extends JFrame {
     private JButton upBtn1;
     private JButton upBtn10;
     private JButton upBtn100;
@@ -40,7 +40,7 @@ public class S01ClickCounter extends JFrame {
         }
     }
 
-    public S01ClickCounter(){
+    public S01Q02ClickCounter(){
         super("클릭 카운터");
         this.upBtn1=new JButton("num+=1");
         this.upBtn10=new JButton("num+=10");
@@ -72,6 +72,6 @@ public class S01ClickCounter extends JFrame {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new S01ClickCounter();
+        new S01Q02ClickCounter();
     }
 }

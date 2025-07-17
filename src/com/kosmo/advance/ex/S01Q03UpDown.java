@@ -12,7 +12,7 @@ import java.awt.*;
 
 ⸻
 */
-public class S01UpDown extends JFrame {
+public class S01Q03UpDown extends JFrame {
     private JButton upBtn;
     private JButton downBtn;
     private JButton resetBtn;
@@ -21,7 +21,7 @@ public class S01UpDown extends JFrame {
     private int num;
     private final int MAX;
     private final int MIN;
-    public S01UpDown(int MAX,int MIN){
+    public S01Q03UpDown(int MAX, int MIN){
         this.MAX=MAX;
         this.MIN=MIN;
         this.p=new JPanel();
@@ -69,6 +69,6 @@ public class S01UpDown extends JFrame {
 
 
     public static void main(String[] args) {
-        new S01UpDown(10,-10);
+        new S01Q03UpDown(10,-10);
     }
 }
