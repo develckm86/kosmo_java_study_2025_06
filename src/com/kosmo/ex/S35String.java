@@ -151,30 +151,35 @@ list.subList(1, 3); // ["b", "c"]
 📘 기본 개념 (1~5)
 
 	1.	자바에서 문자열은 어떤 자료형인가?
+	B
 A. char[]
 B. String
 C. StringBuilder
 D. List
 
 	2.	다음 중 String의 특징으로 올바른 것은?
+    B
 A. 문자열은 가변이다
-B. 문자열은 참조형이지만 값처럼 다룬다 // 값==기본형
+B. 문자열은 참조형이지만 값처럼 다룬다 // 값==기본형(불변데이터)
 C. 문자열은 기본형이다
 D. 문자열은 항상 new로 생성해야 한다
 
 	3.	문자열 + 연산의 결과는 어떤 객체인가?
+	C
 A. 같은 객체
 B. 기존 문자열을 수정한 객체
 C. 새로운 문자열 객체
 D. StringBuilder 객체
 
     4.  다음 중 문자열에서 문자를 하나씩 꺼내는 데 사용할 수 있는 메서드는?
+    B
 A. substring()
 B. charAt()
 C. contains()
-D. split()
+D. "안녕,잘가".split(",") ["안녕","잘가"]
 
 	5.	다음 중 문자열의 불변성 설명으로 옳은 것은?
+	C
 A. 문자열은 내용을 수정할 수 있다
 B. 문자열을 더하면 원본 문자열이 바뀐다
 C. 문자열 연산 시 기존 문자열은 유지되고 새 문자열이 생성된다
@@ -189,14 +194,14 @@ D. 문자열은 내부적으로 리스트로 관리된다
 String a = "hello";
 String b = "hello";
 System.out.println(a == b);
-
+A
 A. true
 B. false
 C. 컴파일 에러
 D. 예외 발생
 
 	7.	다음 코드의 출력 결과는?
-
+B
 String a = "hi";
 String b = new String("hi");
 System.out.println(a == b);
@@ -207,18 +212,23 @@ C. 예외
 D. null
 
 	8.	문자열을 비교할 때 == 대신 equals()를 써야 하는 이유는?
+== : 자료형 hashcode 비교, 기본형 비교 크기를 비교
+equals : 자료의 내용(필드)를 비교하기 위해
+B
 A. equals가 더 빠르기 때문에
 B. 문자열 내용 비교는 equals로 해야 하기 때문에
 C. ==은 null을 허용하지 않기 때문에
 D. equals는 기본형만 가능하기 때문에
 
 	9.	다음 중 문자열 연결 결과가 "hello42"가 되는 것은?
+D
 A. "hello" + 4 + 2
 B. "hello" + 4 + "2"
 C. "hello" + "4" + "2"
 D. 모두 맞다
 
 	10.	문자열 + 숫자 연산에서 우선순위가 높은 것은?
+	C
 A. 산술 연산
 B. 문자열 연결
 C. 괄호
@@ -229,60 +239,70 @@ D. 비교 연산
 ✅ 문자열 유용한 메서드 관련 문제 (총 10문제)
 
 	11.	"banana".length()의 결과는?
+	B
 A. 5
 B. 6
 C. 7
 D. 오류
 
 	12.	"hello".charAt(1)의 결과는?
+	A
 A. 'e'
 B. "e"
 C. 'h'
 D. 'l'
 
 	13.	"apple".substring(1, 4)의 결과는?
+	A
 A. "ppl"
 B. "pple"
 C. "ple"
 D. "app"
 
 	14.	"hello".contains("ll")의 결과는?
+	A
 A. true
 B. false
 C. 오류
 D. “ll”
 
 	15.	"java".toUpperCase()의 결과는?
+	B
 A. "Java"
 B. "JAVA"
 C. "java"
 D. 오류
 
 	16.	"hi there".indexOf("t")의 결과는?
+	B
 A. 2
 B. 3
 C. 4
 D. 1
 
 	17.	"hello".replace("l", "x")의 결과는?
+	A
 A. "hexxo"
 B. "hello"
 C. "hexx"
 D. "hxxlo"
 
-	18.	"  hello  ".trim()의 결과는?
+	18."  hello  ".trim()의 결과는?
+	A
 A. "hello"
 B. "  hello"
 C. "hello  "
 D. "  hello  "
 
 	19.	"abcde".substring(2)의 결과는?
+	B
 A. "cd"
 B. "cde"
 C. "de"
 D. "bcde"
 
 	20.	"apple".contains("A")의 결과는?
+	B
 A. true
 B. false
 C. 오류
