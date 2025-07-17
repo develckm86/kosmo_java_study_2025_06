@@ -54,6 +54,8 @@ new GridLayout(2, 3) → 2행 3열
         frame.setBounds(-1980,0,500,500);
         frame.setVisible(true);
 
+        //라벨 3개를 카드레이아웃으로 구성하고 버튼을 누르면 카드가 변경되도록 구현
+
 
     }
 }
