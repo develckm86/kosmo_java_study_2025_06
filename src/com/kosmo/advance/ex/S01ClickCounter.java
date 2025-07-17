@@ -3,25 +3,22 @@ package com.kosmo.advance.ex;
 
 import javax.swing.*;
 
-/*2. 클릭 카운터 앱 (Medium)
+/*2. 카운터 앱 (Medium)
 
-목표: 버튼을 여러 번 클릭한 횟수를 저장하고 출력
+목표:  숫자를 증가시키는 카운터입니다.
+* 버튼 3개는 1,10,100 씩 수를 증가시키는 버튼이고 리셋버튼으로 0으로 바꿀수 있습니다.
+*
 	•	기능:
-	•	누른 횟수 누적 (클릭 수: 25)
-	•	리셋
-	•	클릭 속도 계산 (선택 사항)
-	•	도전:
-	•	Timer 사용해서 초당 클릭 수 계산
+	•	1 씩 증가하는 버튼
+	•	10씩 증가하는 버튼
+	•	100 씩 증가하는 버튼
+	•	0으로 수를 리셋하는 버튼
+	•	수를 출력하는 라벨
 
 */
-public class S01ClickCounter {
+public class S01ClickCounter extends JFrame {
+
     public static void main(String[] args) throws InterruptedException {
 
-        //주의 javax.swing.Timer (java.util.Timer 아님)
-        Timer timer =new Timer(1000,(e)->{
-            System.out.println("1초마다 실행됨");
-        });
     }
-
-
 }

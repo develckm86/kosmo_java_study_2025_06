@@ -13,13 +13,23 @@ import java.awt.*;
 */
 public class S01NumberUp extends JFrame {
     private JButton btn;
+    private JButton resetBtn;
     private JLabel label;
+    private JPanel p;
     private int num;
     private final int lastNum=10;
     public S01NumberUp(){
+        this.p=new JPanel();
+        this.p.setLayout(new FlowLayout());
+        this.resetBtn=new JButton("리셋");
         this.btn=new JButton("n++");
-        this.label=new JLabel(num+" 수를 10까지 올리는 게임",SwingConstants.CENTER);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        p.add(btn);
+        p.add(resetBtn);
+        this.add(p,BorderLayout.NORTH);
+        resetBtn.addActionListener((e)->{
+            num=0;
+            label.setText(num+"");
+        });
         btn.addActionListener((e)->{
             num++;
             label.setText(num+"");
@@ -29,7 +39,9 @@ public class S01NumberUp extends JFrame {
                 label.setText(num+" 수를 10까지 올리는 게임");
             }
         });
-        this.add(btn, BorderLayout.SOUTH);
+
+        this.label=new JLabel(num+" 수를 10까지 올리는 게임",SwingConstants.CENTER);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.add(label);
         this.setBounds(0,0,400,400);
         this.setVisible(true);
