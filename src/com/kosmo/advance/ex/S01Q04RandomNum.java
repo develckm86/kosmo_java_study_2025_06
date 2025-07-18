@@ -55,9 +55,19 @@ public class S01Q04RandomNum extends JFrame {
     class NumInputHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ++cnt;
+
             String numStr=numInput.getText(); //입력한 수의 문자열
-            int num=Integer.parseInt(numStr); //수로 형변환
+            //"30"->30 (O)
+            //"삼십"-> 오류
+            int num=0;
+            try{
+                num=Integer.parseInt(numStr); //수로 형변환
+            }catch (NumberFormatException ex){
+                centerLabel.setText("숫만 입력하세요!!");
+                return; //다음코드가 실행되지 않도록 함수 종료
+            }
+
+            ++cnt;
             if(num==random){ //정답
                 centerLabel.setText(gameMsg(GAME_WIN));
             }else if(cnt==MAX_CNT){ //오답인데 마지막 기회일때
