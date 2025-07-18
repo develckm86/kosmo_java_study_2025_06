@@ -30,7 +30,7 @@ Swing은 순수 자바로 구현되어 OS와 무관한 일관된 GUI 제공이 �
         예를 들어 버튼이나 텍스트 필드 등을 포함할 수 있는 GUI 구성 요소입니다.
 
 * 자바에서는 다음과 같은 클래스들이 대표적인 컨테이너입니다:
-	•	JFrame (최상위 컨테이너)
+	•	JFrame (최상위 컨테이너=>window)
 	•	JDialog
 	•	JPanel (중간 컨테이너)
 	•	JScrollPane, JTabbedPane 등
@@ -42,6 +42,9 @@ Swing은 순수 자바로 구현되어 OS와 무관한 일관된 GUI 제공이 �
         예: 버튼(JButton), 텍스트 필드(JTextField), 레이블(JLabel), 체크박스 등
         이들은 모두 java.awt.Component 클래스를 상속합니다.
 
+*  html  tag 요소 => css = flex, float... grid
+* 컨터이너 요소  div, p, ul ..
+* 컴포넌트 요소  button, input, i, span
 ⸻
 
 	•	컨테이너와 컴포넌트의 관계
@@ -62,18 +65,18 @@ JFrame (최상위 컨테이너)
         그 위에 다음과 같은 계층이 존재합니다:
 
 java.awt.Component (모든 UI 요소의 최상위 클래스)
-   └── java.awt.Container (컴포넌트를 담을 수 있는 클래스)
        ├── javax.swing.JComponent (AWT를 확장한 Swing 기반 UI 요소)
-       │    ├── JButton, JLabel, JTextField 등
+           ├── JButton, JLabel, JTextField 등
+
+   └── java.awt.Container (컴포넌트를 담을 수 있는 클래스)
        │    └── JPanel (다른 컴포넌트를 담을 수 있는 Swing 컨테이너)
        └── java.awt.Window
-            └── java.awt.Frame
-                 └── javax.swing.JFrame
+             └── javax.swing.JFrame
 
 ⸻
 
 	•	요약
-	•	컴포넌트: 화면에 표시되고 사용자와 상호작용하는 단위
+	•	컴포넌트: 화면에 표시되고 사용자와 상호작용(EventListener)하는 단위
 	•	컨테이너: 컴포넌트를 담는 그릇 (자체도 컴포넌트임)
 	•	중첩 가능: 컨테이너는 또 다른 컨테이너(예: JPanel)를 포함할 수 있어 복잡한 UI를 계층적으로 구성 가능
 
@@ -82,23 +85,29 @@ java.awt.Component (모든 UI 요소의 최상위 클래스)
     컴포넌트를 어떤 방식으로 배치할지 결정하는 객체
 
     대표적인 레이아웃 매니저
+
     •	FlowLayout:
         컴포넌트를 왼쪽에서 오른쪽으로 순서대로 나열
         기본적으로 JPanel의 기본 레이아웃
         줄 바꿈도 자동 처리
+
 	•	BorderLayout:
         동서남북(center 포함) 5개의 영역에 컴포넌트를 배치
         JFrame의 기본 레이아웃
         add(comp, BorderLayout.NORTH) 형태로 지정
+
 	•	GridLayout:
         행 × 열 형태의 격자 구조로 모든 셀에 같은 크기로 컴포넌트 배치
         new GridLayout(2, 3) → 2행 3열
+
 	•	GridBagLayout:
         가장 유연하고 복잡한 레이아웃
         셀 병합, 비대칭 배치 가능 (실무에서 많이 사용됨)
+
 	•	CardLayout:
         여러 개의 화면을 카드처럼 겹쳐 놓고 하나씩 보여줌
         탭 전환, 마법사(wizard) UI에 유용
+
 	•	null 레이아웃:
         레이아웃 매니저 없이 수동 배치 (setBounds())
         복잡한 디자인 가능하지만 화면 크기 변경에 취약 → 잘 사용하지 않음
@@ -108,18 +117,24 @@ java.awt.Component (모든 UI 요소의 최상위 클래스)
         Swing은 이벤트 기반 구조이며, 사용자의 행동(버튼 클릭 등)에 반응해야 함
         주요 이벤트 리스너 인터페이스:
 
-	•	ActionListener: 버튼, 메뉴 등 클릭 이벤트
+	•	ActionListener: 버튼, 키보드 엔터, 메뉴 등 클릭 이벤트
 	•	MouseListener, MouseMotionListener: 마우스 동작
 	•	KeyListener: 키보드 입력
 	•	WindowListener: 창 열기/닫기 등 창 관련 이벤트
 사용 예:
 
 JButton btn = new JButton("클릭");
-btn.addActionListener(new ActionListener() {
+
+ActionListener al = new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         System.out.println("버튼이 눌렸습니다.");
     }
-});
+}
+ActionListener al = (e)->{
+    System.out.println("버튼이 눌렸습니다.");
+}
+
+btn.addActionListener(al);
 
 ⸻
 	•	콜백 함수의 개념과 사용
@@ -209,9 +224,9 @@ int answer = rand.nextInt(50) + 1;  // 1~50 사이의 정수
 
 - 필드 (상수)
 	•	Math.PI
-원주율 상수 (≈ 3.141592653589793)
+        원주율 상수 (≈ 3.141592653589793)
 	•	Math.E
-자연로그의 밑 상수 (≈ 2.718281828459045)
+        자연로그의 밑 상수 (≈ 2.718281828459045)
 
 ⸻
 
@@ -219,7 +234,7 @@ int answer = rand.nextInt(50) + 1;  // 1~50 사이의 정수
 	•	Math.abs(x)
         절댓값 반환 (int, long, float, double 모두 지원)
 	•	Math.max(x, y)
-    두 값 중 큰 값 반환
+        두 값 중 큰 값 반환
 	•	Math.min(x, y)
         두 값 중 작은 값 반환
 	•	Math.addExact(x, y)
@@ -244,7 +259,7 @@ int answer = rand.nextInt(50) + 1;  // 1~50 사이의 정수
 - 반올림/버림/올림 관련 함수
 	•	Math.round(x)
         반올림 (float → int, double → long)
-	•	Math.ceil(x)
+	•	Math.ceil(x) 1.2=>2
         올림값 반환 (작은 정수 중 가장 큰 값, double 반환)
 	•	Math.floor(x)
         버림값 반환 (큰 정수 중 가장 작은 값, double 반환)
@@ -293,6 +308,7 @@ int answer = rand.nextInt(50) + 1;  // 1~50 사이의 정수
 - 난수 및 부호 처리
 	•	Math.random()
         0.0 이상 1.0 미만의 double 난수 반환
+        0.12312498325409724359
 	•	Math.signum(x)
         x가 양수면 1.0, 음수면 -1.0, 0이면 0.0 반환
 	•	Math.copySign(magnitude, sign)
@@ -308,8 +324,10 @@ int answer = rand.nextInt(50) + 1;  // 1~50 사이의 정수
 	•	Math.ulp(x)
         x에서 표현 가능한 가장 작은 단위(단정밀도/배정밀도)
 
-* Java의 **래퍼 클래스(Wrapper Class)**는 기본형(primitive type)을 객체로 다룰 수 있게 해주는 클래스입니다.
-* 각각의 기본형에 대해 대응되는 래퍼 클래스가 존재하며, 이 클래스들은 java.lang 패키지에 포함되어 있습니다.
+* Java의 **래퍼 클래스(Wrapper Class)**는
+*  기본형(primitive type)을 객체로 다룰 수 있게 해주는 클래스입니다.
+* 각각의 기본형에 대해 대응되는 래퍼 클래스가 존재하며,
+* 이 클래스들은 java.lang 패키지에 포함되어 있습니다.
 
 다음은 주요 래퍼 클래스와 함께 자주 쓰이는 유용한 메서드들을 정리한 내용입니다.
 
@@ -332,7 +350,7 @@ int answer = rand.nextInt(50) + 1;  // 1~50 사이의 정수
         문자열 또는 기본형 값을 해당 래퍼 객체로 반환
         예: Integer.valueOf("123") → Integer(123)
 
-	•	parse타입(String s)
+	•	parse타입(String s) **
         문자열을 기본형으로 변환
         예: Integer.parseInt("123") → int 123
         예: Double.parseDouble("3.14") → double 3.14
@@ -372,8 +390,6 @@ int answer = rand.nextInt(50) + 1;  // 1~50 사이의 정수
 ⸻
 
 - Double / Float 전용 메서드
-	•	isNaN()
-        NaN(Not-a-Number)인지 확인
 	•	isInfinite()
         무한대인지 확인
 	•	Double.compare(x, y)

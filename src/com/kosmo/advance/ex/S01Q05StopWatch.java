@@ -17,9 +17,11 @@ public class S01Q05StopWatch extends JFrame {
     private JPanel topPanel; //시작, 종료 버튼 패널
     private JLabel centerLabel;
     private int time=1000; //10초*100
+
+
     private Timer timer;
     public S01Q05StopWatch(){
-        timer=new Timer(1,(e)->{
+        timer=new Timer(10,(e)->{
             if(time==0){
                 timer.stop();
                 return;
@@ -42,7 +44,7 @@ public class S01Q05StopWatch extends JFrame {
             centerLabel.setText(String.format("%.2f", time/100.0));
         });
         topPanel=new JPanel();
-        topPanel.setLayout(new GridLayout(1,2));
+        topPanel.setLayout(new GridLayout(1,3));
         topPanel.add(startBtn);
         topPanel.add(stopBtn);
         topPanel.add(resetBtn);
@@ -51,6 +53,9 @@ public class S01Q05StopWatch extends JFrame {
         this.add(centerLabel);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+
+
         this.setBounds(0,0,500,400);
         this.setVisible(true);
     }
