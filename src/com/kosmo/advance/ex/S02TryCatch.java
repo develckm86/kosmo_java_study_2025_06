@@ -6,6 +6,7 @@ public class S02TryCatch {
 1. 예외(Exception)란?
 	•	정의: 프로그램 실행 중 발생할 수 있는 비정상적인 상황이나 오류
 	•	예: 0으로 나누기, 배열 인덱스 초과, 파일 없음, 널 포인터 등
+	//null.toString()
 
 ⸻
 
