@@ -30,7 +30,7 @@ public class A14JavaxSwingTimer {
         btn.addActionListener((e)->{
             t.start();
         });
-        frame.setBounds(-1980,0,200,200);
+        frame.setBounds(0,0,200,200);
         frame.setVisible(true);
         Thread.sleep(1000*10);
         t.stop();

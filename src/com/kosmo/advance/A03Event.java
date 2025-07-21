@@ -42,7 +42,7 @@ public class A03Event {
         frame.add(label,BorderLayout.CENTER);
 
         frame.setSize(500,500);
-        frame.setLocation(-1980,0);
+        frame.setLocation(0,0);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 
