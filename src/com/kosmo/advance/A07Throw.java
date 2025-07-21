@@ -2,7 +2,8 @@ package com.kosmo.advance;
 
 public class A07Throw {
     static void sum(int a, int b)throws Exception{
-        new ArithmeticException();
+        //new ArithmeticException(); //객체만 생성
+        throw  new ArithmeticException(); //생성한 객체로 오류 발생 !!
     }
     //선택지
     //1. 예외를 다시 위임 (최종사용자에서만 try catch 사용)
@@ -16,12 +17,10 @@ public class A07Throw {
         try {
             sum(i,i2);
         } catch (Exception e) {
-            System.out.println("수학적 오류!!");
-            throw new Exception("수학적 오류!! 전가!");
+            System.out.println("수학적 오류 해결");
+            throw new Exception("발전소 터졌어요!!!");
         }
     }
-
-
 
     public static void main(String[] args){
 
@@ -32,13 +31,5 @@ public class A07Throw {
         }
 
 
-        int i=1;
-        if(i==1){ //컴파일러 속이기
-            //강체로 오류를 발생 ?????
-            throw new NumberFormatException("숫자만 입력");
-            //try catch 로 예외를 처리한 메서드가 있는데
-            //나를 사용한 메서드에서 오류를 알아차리면 좋겠을 때!!
-        }
-        System.out.println("안녕!!");
     }
 }

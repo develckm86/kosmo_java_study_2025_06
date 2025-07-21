@@ -6,15 +6,14 @@ public class S02TryCatch {
 1. 예외(Exception)란?
 	•	정의: 프로그램 실행 중 발생할 수 있는 비정상적인 상황이나 오류
 	•	예: 0으로 나누기, 배열 인덱스 초과, 파일 없음, 널 포인터 등
-	//null.toString()
 
 ⸻
 
 2. 예외의 종류
 	•	Checked Exception (확인된 예외)
-	•	컴파일러가 확인하고 처리하도록 강제
-	•	예: IOException, SQLException
+	•	예외 위임으로 컴파일러가 예외를 알도록 하고 처리하게 함 throws IOException, SQLException
 	•	try-catch나 throws로 반드시 처리해야 함
+
 	•	Unchecked Exception (확인되지 않은 예외)
 	•	런타임 시점에 발생, 컴파일러가 강제하지 않음
 	•	예: NullPointerException, ArrayIndexOutOfBoundsException, ArithmeticException
@@ -48,20 +47,30 @@ try {
 	•	상위 타입보다 하위 타입 예외를 먼저 작성해야 함
 
 try {
-    String s = null;
-    s.length();
-} catch (NullPointerException e) {
-    System.out.println("널 예외");
-} catch (Exception e) {
+    파일을 찾는 코드;  => 파일을 찾지 못하면 오류
+
+    범준씨와 인터넷으로 접속;  => 범준씨 채팅이 끊어지면 IO 오류 발생
+
+    범준씨에게 파일 보내기;  => 범준씨 주소가 잘못되면 IO 오류 발생
+
+} catch (FileNotFindException e) { //파일을 찾았는데 없을때
+    System.out.println("파일을 못찾았습니다.");
+} catch (IOException e) { //통신 중일때
+    System.out.println("통신을 확인하세요.");
+} catch (Exception e) { //무슨 오류인지 모를때! => 항상 제일 마지막에 작성 (==else)
     System.out.println("기타 예외");
+} finally{
+    //통신 상황에서 많이 사용!
+    close();
 }
 
 
 ⸻
 
 5. 예외 객체의 주요 메서드
-	•	e.getMessage() : 예외 메시지
-	•	e.printStackTrace() : 예외 발생 위치 추적 출력
+	•	e.getMessage() : 예외 메시지  :  throw new Exception("안녕!!!") => "안녕!!!"
+	•	e.printStackTrace() : 예외 발생 위치 추적 출력 == System.ont.print(e) + 빨간 로그
+
 
 ⸻
 

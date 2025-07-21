@@ -18,11 +18,13 @@ public class A06Throws {
     //main 은 코드를 실행하는 어플이기 때문에 try catch로 예외를 처리해야한다.
     public static void main(String[] args){
 
+        int sum= 0;
         try {
-            int sum= sum("10","20");
-            System.out.println(sum);
+            sum = sum("10","20");
         } catch (Exception e) {
-            System.out.println("수를 입력하세요!! ");
+            //throw new RuntimeException(e); //오류를 강제로 발생!!
+            System.out.println("숫자만 사용하세요!!");
         }
+        System.out.println(sum);
     }
 }
