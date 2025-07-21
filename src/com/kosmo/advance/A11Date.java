@@ -63,5 +63,33 @@ public class A11Date {
             System.out.println("문자열 형식이 잘못됨");
             e.printStackTrace();
         }
+        // 유닉스 시간(최초의 소형컴퓨터 운영체제 유닉스가 시간을 표기한 방법)
+        // 유닉스가 만들어진 1970 년 부터 밀리초로 시간을 표현
+        // 시간을 문자열이 아닌 수로 정의(시간 비교가 편리)하기 위해 등장
+        //1970.1.1.0.0.0 -> 0
+        //1970.1.1.0.1.0 -> 1000
+        //1970.1.1.1.0.0 -> 1000*60
+        Date date6=new Date();
+        System.out.println(date6.getTime()); //1753069601371
+        long time=System.currentTimeMillis();
+        System.out.println(time); //1753069601371
+
+        SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf2.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String str="1970-01-01 01:00:00"; //1000*60*60
+        try {
+            Date date7=sdf2.parse(str);
+            System.out.println(date7);
+            System.out.println(date7.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long l=2000000000000l;
+        Date date8=new Date(l); //유닉스 시간으로 date 객체 생성
+        System.out.println(date8);//Wed May 18 12:33:20 KST 2033
+
+
+
     }
 }
