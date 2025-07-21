@@ -16,32 +16,33 @@ public class S01Q05StopWatch extends JFrame {
     private JButton resetBtn; //정지버튼
     private JPanel topPanel; //시작, 종료 버튼 패널
     private JLabel centerLabel;
-    private int time=1000; //10초*100
+    private int time=0; //1/100 초
 
 
     private Timer timer;
     public S01Q05StopWatch(){
+        String zeroStr=String.format("%.2f", time/100.0);
+        // 0 => 0.00
+        //"%f", 실수 : 실수를 문자열에 추가
+        //"%.2f", 실수 : 실수를 소수점 2개까지 문자열로 추가
+
         timer=new Timer(10,(e)->{
-            if(time==0){
-                timer.stop();
-                return;
-            }
-            --time;
+            ++time;
             centerLabel.setText(String.format("%.2f", time/100.0));
-        });//1/1000 초마다 time 을 --하는 타이머
+        });//1/100 초마다 time 을 ++하는 타이머
         startBtn=new JButton("시작");
         startBtn.addActionListener((e)->{
             timer.start();
         });
-        stopBtn=new JButton("종료");
+        stopBtn=new JButton("정지");
         stopBtn.addActionListener((e)->{
             timer.stop();
         });
         resetBtn=new JButton("리셋");
         resetBtn.addActionListener((e)->{
             timer.stop();
-            time=1000;
-            centerLabel.setText(String.format("%.2f", time/100.0));
+            time=0;
+            centerLabel.setText(zeroStr);
         });
         topPanel=new JPanel();
         topPanel.setLayout(new GridLayout(1,3));
@@ -49,7 +50,8 @@ public class S01Q05StopWatch extends JFrame {
         topPanel.add(stopBtn);
         topPanel.add(resetBtn);
         this.add(topPanel,BorderLayout.NORTH);
-        centerLabel=new JLabel(String.format("%.2f", time/100.0));
+        centerLabel=new JLabel(zeroStr,SwingConstants.CENTER);
+        centerLabel.setFont(new Font("",Font.BOLD,50));
         this.add(centerLabel);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
