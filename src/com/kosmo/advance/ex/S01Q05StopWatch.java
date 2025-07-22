@@ -6,7 +6,7 @@ import java.awt.*;
 목표:
 	•	시작, 정지 버튼으로 시간 측정
 	•	javax.swing.Timer 사용
-	•	시간 포맷 출력 (mm:ss)
+	•	시간 포맷 출력 (ss:SS)
 
 ⸻*/
 
