@@ -48,8 +48,33 @@ public class E01Q01NumberUp {
         //1. label을 클래스멤버로 변경
         //2. BtnHandler 생성자에 전달
         //3. BtnHandler 를 사용하지 않고 람다식이나 익명클래스 사용!!
-        btn.addActionListener(new BtnHandler(label));
+        //btn.addActionListener(new BtnHandler(label));
         ///ActionListener(인터페이스) 타입이 콜백함수의 기초 설계도
+        //익명클래스(1~숫자로 된 클래스)는 타입을 구현하는 클래스를 만들기 귀찮아서 도입
+        //인터페이스는 클래스의 가이드 라인이기 때문에 객체가 될수 없다.
+        //오직 클래스만 객체가 될 수 있다.
+        // class 1 implements ActionListener{} <=1이 익명클래스 (컴파일러)
+        ActionListener btnHandler=new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //label=new JLabel(); : 인스턴스가 지역변수를 바꾸는 것은 불가능
+                //인스턴스가 지역변수를 참조하는 것도 불가능하지만 편의상 접근하게 해줌
+                String num=label.getText();
+                int i=Integer.parseInt(num);
+                label.setText(i+1+"");
+                //변수가 바뀐다=>다른 객체로 변경, 객체의 필드가 바뀌는 건 허용
+            }
+        };
+        //btn.addActionListener(btnHandler);
+        //람다식(==화살표함수)
+        ActionListener bthHandlerLambda=(e)->{
+            String num=label.getText();
+            int i=Integer.parseInt(num);
+            label.setText(i+1+"");
+        };
+        btn.addActionListener(bthHandlerLambda);
+
+
 
         label.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         frame.add(btn, BorderLayout.NORTH);
