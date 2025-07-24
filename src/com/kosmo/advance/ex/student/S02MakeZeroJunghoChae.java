@@ -35,34 +35,34 @@ class BtnPlus extends JFrame {
                 if ((x+1)>2){right = false;}
                 if ((y+1)>2){down = false;}
 
-                if (left&&(btn[y][x-1].num != 10)){
+                if (left&&(btn[y][x-1].num != 9)){
                     btn[y][x-1].num++;btn[y][x-1].setText(btn[y][x-1].num+"");
-                    if (btn[y][x-1].num == 10){
+                    if (btn[y][x-1].num == 9){
                         btn[y][x-1].num = 0;
 
                         isZero = true;
                     } else isZero = false;
                 }
-                if (right&& (btn[y][x+1].num != 10)){
+                if (right&& (btn[y][x+1].num != 9)){
                     btn[y][x+1].num++;btn[y][x+1].setText(btn[y][x+1].num+"");
-                    if (btn[y][x+1].num == 10){
+                    if (btn[y][x+1].num == 9){
                         btn[y][x+1].num = 0;
 
                         isZero = true;
                     } else isZero = false;
                 }
-                if (up && (btn[y-1][x].num != 10)){
+                if (up && (btn[y-1][x].num != 9)){
                     btn[y-1][x].num++;btn[y-1][x].setText(btn[y-1][x].num+"");
-                    if (btn[y-1][x].num == 10){
+                    if (btn[y-1][x].num == 9){
                         btn[y-1][x].num = 0;
 
                         isZero = true;
                     } else isZero = false;
                 }
-                if (down && (btn[y+1][x].num != 10)){
+                if (down && (btn[y+1][x].num != 9)){
                     btn[y+1][x].num++;btn[y+1][x].setText(btn[y+1][x].num+"");
 
-                    if (btn[y+1][x].num == 10){
+                    if (btn[y+1][x].num == 9){
                         btn[y+1][x].num = 0 ;
                         isZero = true;
                     } else isZero = false;
