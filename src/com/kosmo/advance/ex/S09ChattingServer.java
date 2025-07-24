@@ -24,12 +24,11 @@ public class S09ChattingServer {
                     try {
                         Scanner in=new Scanner(client.getInputStream());
                         String msg;
-                        while (in.hasNext()){ //hasNext,hasNextLine 클라이언트의 메세지 입력을 대기 (만약 연결이 끓어지면 false 반환 후 반복문 종료)
-                            msg=clientIp+":"+in.nextLine();
+                        while (in.hasNextLine()){ //hasNext,hasNextLine 클라이언트의 메세지 입력을 대기 (만약 연결이 끓어지면 false 반환 후 반복문 종료)
+                            msg=clientIp+"님 메세지 : "+in.nextLine();
                             System.out.println(msg); //클라이언트가 보낸 메세지
                             //접속한 모든 클라이언트에게 메세지 보내기
                             for ( Socket c : clients){
-                                if(c.getInetAddress().toString().equals(clientIp)) continue;
                                 PrintWriter out=new PrintWriter(c.getOutputStream(),true);
                                 out.println(msg);
                             }

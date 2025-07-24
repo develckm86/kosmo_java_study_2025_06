@@ -18,7 +18,6 @@ public class S09ChattingClient {
             new Thread(()->{
                 Scanner scanner=new Scanner(System.in);
                 while (true){
-                    System.out.print("메세지 입력 : ");
                     String msg=scanner.nextLine();
                     out.println(msg);
                 }
