@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class S09ChattingClient {
     public static void main(String[] args) {
         //내컴퓨터 내부 : localhost == 192.0.0.1
-        try (Socket socket =new Socket("localhost",7777);
+        try (Socket socket =new Socket("192.168.0.65",7777);
             PrintWriter out=new PrintWriter(socket.getOutputStream(),true); //연결된 소켓으로 서버에 문자열 데이터를 보내는 객체
             Scanner in=new Scanner(socket.getInputStream());){
 
@@ -33,7 +33,6 @@ public class S09ChattingClient {
                     System.out.println("메세지 수신 중 오류");
                     e.printStackTrace();
                 }
-
             }).start();
 
             Thread.currentThread().join(); //main 쓰레드가 다른 스레드가 종료될 때까지 기다림

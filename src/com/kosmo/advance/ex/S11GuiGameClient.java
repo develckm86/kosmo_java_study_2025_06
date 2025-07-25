@@ -152,7 +152,7 @@ public class S11GuiGameClient extends JFrame {
 
     public static void main(String[] args) {
         try {
-            new S11GuiGameClient("127.0.0.1",5555);
+            new S11GuiGameClient("192.168.0.65",5555);
         } catch (IOException e) {
             e.printStackTrace();
         }

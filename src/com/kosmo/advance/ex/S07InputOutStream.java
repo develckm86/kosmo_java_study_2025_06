@@ -4,10 +4,6 @@ public class S07InputOutStream {
     /*
 ⸻
 
-물론입니다. 기존 내용을 바탕으로 조금 더 깊이 있으면서도 쉽게 이해할 수 있도록 보강한 설명을 아래에 정리해드릴게요.
-
-⸻
-
 - 1. 입출력 스트림 개요
 
 	•Stream(스트림)이란?
@@ -16,8 +12,7 @@ public class S07InputOutStream {
     즉, 어디선가 데이터를 받아오거나, 어디론가 데이터를 보내는 과정 전체를 추상화한 개념입니다.
 
     자바에서 스트림은 기본적으로 단방향이며,
-    데이터는 **한 번에 한 바이트(또는 문자)**씩 흐름을 따라 이동합니다.
-
+    데이터는 **한 번에 한 바이트(또는 문자)**씩 흐름을 따라 이동합니다
     만약 스트림이 없다면, 데이터를 매번 한 바이트씩 직접 읽고
     “지금 어디까지 읽었는지”를 매번 추적해야 하며,
     이런 작업은 매우 번거롭고 비효율적입니다.
@@ -36,14 +31,15 @@ public class S07InputOutStream {
 	•	입력(Input) 스트림
         외부(파일, 키보드, 네트워크 등)에서 데이터를 읽어와 프로그램 내부로 가져오는 흐름
             예:
-            •	키보드에서 사용자 입력 받기
-            •	파일에서 데이터 읽기
+            •	키보드에서 사용자 입력 자바 어플이 받기
+            •	OS의 파일 시스템에서 자바 어플이 데이터를 읽기
             •	서버로부터 응답 받기
-            •	출력(Output) 스트림
+
+    •	출력(Output) 스트림
         프로그램 내부에서 생성된 데이터를 외부(파일, 화면, 네트워크 등)로 보내는 흐름
             예:
             •	파일에 데이터 저장
-            •	콘솔에 출력
+            •	콘솔에 출력 System.out.print("안녕!!") //out ==OutputStream
             •	네트워크를 통해 데이터 전송
 
 
@@ -55,11 +51,13 @@ public class S07InputOutStream {
 	•	예: 소켓 통신에서는 getInputStream()과 getOutputStream()을 따로 사용
 
 ⸻
+{1,2,3,4,5}
+
 
 - 스트림의 핵심 특징 요약
-	•	순차적 처리: 데이터를 한 번에 하나씩 읽고 씀 (대용량 처리에 적합)
+	•	순차적 처리(Iterator와 같다): 데이터를 한 번에 하나씩 읽고 씀 (대용량 처리에 적합)
 	•	단방향 흐름: 입력과 출력은 별도의 스트림
-	•	다양한 출처와 목적지 지원: 파일, 네트워크, 메모리, 콘솔 등
+	•	다양한 출처와 목적지 지원: 모든 데이터를 처리할 수 있다.(파일, 네트워크, 메모리, 콘솔 등)
 	•	보조 스트림 가능: Buffered, Data, Object 등 성능 향상 및 기능 확장 가능
 
 ⸻
@@ -92,7 +90,7 @@ public class S07InputOutStream {
             •	InputStream, OutputStream 계열
             •	주로 이미지, 영상, 오디오, 바이너리 파일 등 처리
 
-        •	문자 스트림 (2바이트 단위)
+        •	문자 스트림 (2바이트 단위) : 자바는 UTF-16 2byte 고정 문자
             •	Reader, Writer 계열
             •	주로 텍스트 데이터 처리
 
@@ -100,28 +98,39 @@ public class S07InputOutStream {
 
 3. 주요 클래스 구조
 	•	InputStream / OutputStream (추상 클래스) : 1byte씩 문자열을 처리
-        •	FileInputStream, FileOutputStream : 파일에 문자열을 바이트 단위로 저장및 읽기
-        •	BufferedInputStream, BufferedOutputStream : 버퍼를 사용해 입출력 성능 향상
-        •	ObjectInputStream, ObjectOutputStream : 객체 단위로 읽고 쓰기 (직렬화 필요)
+    •	FileInputStream, FileOutputStream : 파일에 문자열을 바이트 단위로 저장및 읽기
+    •	ObjectInputStream, ObjectOutputStream : 객체 단위로 읽고 쓰기 (직렬화 필요)
+
+    •	BufferedInputStream, BufferedOutputStream : 버퍼를 사용해 입출력 성능 향상 (보조 클래스)
 
 	•	Reader / Writer (추상 클래스) : 2byte씩 문자열 처리
-        •	FileReader, FileWriter : 파일에 문자열을 바이트 단위로 저장및 읽기
-        •	BufferedReader, BufferedWriter : 버퍼로 한줄씩(readLine) 읽고 쓰기 가능
-        •	InputStreamReader, OutputStreamWriter : 바이트 스트림을 문자 스트림으로 변환 (인코딩 설정 가능)
+    •	FileReader, FileWriter : 파일에 문자열을 2바이트 단위로 저장및 읽기
+    •	BufferedReader, BufferedWriter : 버퍼로 한줄씩(readLine) 읽고 쓰기 가능 (스트링 버퍼와 비슷)
+
+    •	InputStreamReader, OutputStreamWriter : 바이트 스트림을 문자 스트림으로 변환 (인코딩 설정 가능)
 
 ⸻
 
 4. 기본 예제: 파일에 문자열 저장 및 읽기
 
 4-1. FileWriter  (문자 스트림)
-    try (FileWriter writer = new FileWriter("hello.txt")) {
+    FileWriter writer=null;
+    try{
+        writer = new FileWriter("hello.txt");
         writer.write("안녕하세요\nJava 입출력 수업입니다.");
     } catch (IOException e) {
         e.printStackTrace();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } finally{
+        if(writer!=null) writer.close();
     }
 
 4-1. FileReader (문자 스트림)
-    try (FileReader reader = new FileReader("hello.txt")) {
+
+    try (   FileReader reader = new FileReader("hello.txt") ) {
+    //auto close : try()에 생성한 객체의 close 함수를 finally 지점에 호출
+    //try() 내에서 생성한 변수는 try 의 지역변수가 됨
         int data;
         while ((data = reader.read()) != -1) {
             System.out.print((char) data);
