@@ -10,13 +10,14 @@ class Block implements Serializable {//타입에 객체가 직렬화 대상임�
     int y;
     int[] color;//{0~255 :red, 0~255: green, 0~255:blue}
 
-    //InputStream in; //InputStream Serializable 를 구현 했을때만 사용가능!!
+    transient InputStream in; //InputStream Serializable 를 구현 했을때만 사용가능!!
+    //transient : 직렬화에서 해당 필드를 제외
 
     public Block(int x, int y, int[] color) {
         this.x = x;
         this.y = y;
         this.color = color;
-      //  in=System.in;
+        in=System.in;
     }
 
     @Override

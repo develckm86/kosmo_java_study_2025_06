@@ -11,26 +11,30 @@ public class A17File {
         //문자열로된 파일을 작성하고 읽어오는 예제
         //왠만한 입출력은 오류를 동반하기 때문에 예외처리 하세요!
         //입출력은 stream을 동반하는데 다 사용하고 나면 close()를 해야합니다.
-/*
-        FileWriter fileWriter=null;
-        try {
-            fileWriter=new FileWriter("A17hello.txt");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }finally {
-            try {
-                if(fileWriter!=null)fileWriter.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-*/
+
+//        FileWriter fileWriter=null;
+//        try {
+//            fileWriter=new FileWriter("A17hello.txt");
+//            fileWriter.write("안녕");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }finally {
+//            try {
+//                if(fileWriter!=null)fileWriter.close();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+
 
         //close()가 작성된 클래스의 close를 자동으로 finally 지점에 호출
         // ./경로  : 현재 위치를 기준으로 해당 파일을 작성
         try (FileWriter fileWriter=new FileWriter("./L17Hello.txt")){
+
             fileWriter.write("안녕하세요!\n");
             fileWriter.write("자바 고급 수업 입니다!");
+
+
         } catch (IOException e) {
             System.out.println("파일 출력 중 오류 발생");
             e.printStackTrace();

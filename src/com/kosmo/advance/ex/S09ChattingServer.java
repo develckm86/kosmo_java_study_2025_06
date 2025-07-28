@@ -17,10 +17,8 @@ public class S09ChattingServer {
                 Socket client=server.accept(); //누군가 접속했습니다.
                 String clientIp=client.getInetAddress().toString(); //어디서(ip) 접솝했는지 확인
                 System.out.println(clientIp+"가 접속");
-                clients.add( client ); //접속한 클라이언트 모음 (ip: Socket)
-                //클라이언트가 메세지 데이터를 보내는 것을 기다림
-                //여러명이 접속해서 데이터를 보낼 예정이기 때문에 Thread 생성
-                new Thread(()->{
+                clients.add( client ); //접속한 클라이언트 모음 (ip: Socket) 클라이언트가 메세지 데이터를 보내는 것을 기다렸다가 접속한 모두에게 보냄ㅋ₩
+                new Thread(()->{//여러명이 접속해서 데이터를 보낼 예정이기 때문에 Thread 생성
                     try {
                         Scanner in=new Scanner(client.getInputStream());
                         String msg;
@@ -31,6 +29,7 @@ public class S09ChattingServer {
                             for ( Socket c : clients){
                                 PrintWriter out=new PrintWriter(c.getOutputStream(),true);
                                 out.println(msg);
+                                out.flush();
                             }
                         }
                     } catch (IOException e) {

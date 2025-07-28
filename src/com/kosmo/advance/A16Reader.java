@@ -32,14 +32,12 @@ public class A16Reader {
         str=bufferedReader.readLine();
         System.out.println("버퍼로 받은 한줄 :"+str);
 
-
         //**Scanner : BufferedReader 보다 기능이 많고 inputStream 을 바로 변환가능
         //BufferedReader 보다 데이터 변환 속도가 느리고 메모리 차지를 많이 함
         //InputStreamReader 처럼 인코딩 변환이 다양하지 않음
         Scanner scanner=new Scanner(System.in);
         str=scanner.nextLine();
         System.out.println("스캐너로 받은 한줄 :"+str);
-
 
         InputStream inputStream1=System.in;
         InputStreamReader inputStreamReader=new InputStreamReader(inputStream1);

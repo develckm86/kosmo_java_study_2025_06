@@ -12,7 +12,6 @@ public class S09ChattingClient {
         try (Socket socket =new Socket("192.168.0.65",7777);
             PrintWriter out=new PrintWriter(socket.getOutputStream(),true); //연결된 소켓으로 서버에 문자열 데이터를 보내는 객체
             Scanner in=new Scanner(socket.getInputStream());){
-
             System.out.println("채팅 서버 접속완료!");
             //터미널에서 입력한 문자열을 서버로 보냄( 채팅을 보내면서 채팅을 불러와야하기 때문에 thread 생성)
             new Thread(()->{
@@ -22,7 +21,6 @@ public class S09ChattingClient {
                     out.println(msg);
                 }
             }).start();
-
             new Thread(()->{
                 try {
                     while (in.hasNextLine()){
@@ -34,7 +32,6 @@ public class S09ChattingClient {
                     e.printStackTrace();
                 }
             }).start();
-
             Thread.currentThread().join(); //main 쓰레드가 다른 스레드가 종료될 때까지 기다림
             //모든 일을 스레드가 하고 있어서 main은 다른 스레드를 기다리지 않고 종료됨.
             //보통은 상관 없지만 try가 종료되면 auto close를 지정한 Socket 연결이 끓어져버림
