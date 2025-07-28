@@ -31,7 +31,7 @@ public class A20ChattingServer {
                                 System.out.println(msg);
                                 for(Socket c: clients){
                                     BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
-                                    writer.write(msg);
+                                    writer.write(msg+"\n");
                                     writer.flush();//버퍼는 사용하고 비워야함 (오류 위험)
                                 }
                             } catch (IOException e) {
