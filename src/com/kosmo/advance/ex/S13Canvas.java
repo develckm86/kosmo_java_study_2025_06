@@ -280,12 +280,14 @@ class MyCanvas extends Canvas implements Runnable {
 
 - 1. Toolkit vs ImageIcon 차이
 
-Toolkit.getDefaultToolkit().getImage(“경로”)
+Image img=Toolkit.getDefaultToolkit().getImage(“경로”)
+img. : 아직 다불러오지 못함
 	•	운영체제와 연결된 기본 툴킷을 통해 이미지를 불러옵니다.
 	•	비동기 방식: 이미지가 완전히 로드되기 전에 객체가 반환됩니다.
 	•	paint에서 사용할 때 이미지 로딩이 덜 되었을 수 있어 깜빡임이 생기기도 함.
 
-new ImageIcon(“경로”).getImage()
+Image img=new ImageIcon(“경로”).getImage();
+img. : 이미지가 다 불러올때까지 기다렸다가 실행
 	•	ImageIcon은 이미지 로딩이 완료된 후 객체를 반환함.
 	•	동기 방식: 로딩이 완료될 때까지 기다렸다가 반환.
 	•	즉, 이미지가 안정적으로 표시되길 원하면 ImageIcon이 더 나음.
