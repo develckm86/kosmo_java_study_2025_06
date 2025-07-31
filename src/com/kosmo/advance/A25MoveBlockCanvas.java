@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class A25MoveBlockCanvas extends JFrame {
     int x=0; //분기마다 변경 후 캔버스를 다시 그리려고
@@ -12,6 +13,29 @@ public class A25MoveBlockCanvas extends JFrame {
     final int WIDTH=500;
     final int HEIGHT=500;
     int keyCode=KeyEvent.VK_RIGHT; //기본은 오른쪽
+    private int INCREASE=20;
+
+    static class Block{
+        public int x;
+        public int y;
+        public int width=50;
+        public int height=50;
+        private Color color;
+
+        public Block(int x, int y, Color color) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+        }
+
+        public Block(int x, int y, int width, int height, Color color) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+            this.color = color;
+        }
+    }
 
     //start()시작, stop()멈춤
     class MyCanvas extends Canvas{
@@ -34,16 +58,24 @@ public class A25MoveBlockCanvas extends JFrame {
         @Override
         public void paint(Graphics g) {
             //블럭(color,x,y,w,h)을 객체로 만들어서 2개이상 출력
+            for(Block block : blocks){
+                g.setColor(block.color);
+                g.fillRect(block.x,block.y,block.width,block.height);
+            }
 
-            g.setColor(Color.BLUE);
-            g.fillRect(x,200,50,50);
         }
     }
 
-
     private Canvas canvas;
+    private java.util.List<Block> blocks=new ArrayList<>();
     public A25MoveBlockCanvas(){
         super("블럭을 움직이는 캔버스");
+
+        Block block1=new Block(50,50,new Color(250,100,100));
+        Block block2=new Block(150,150,new Color(100,250,100));
+        blocks.add(block1);
+        blocks.add(block2);
+
 
         canvas=new MyCanvas();
         canvas.setBackground(new Color(200,200,250));
@@ -60,20 +92,25 @@ public class A25MoveBlockCanvas extends JFrame {
 
 
         timer=new Timer(100,(e)->{//분기마다 실행할 함수
-            switch (keyCode){
-                case KeyEvent.VK_RIGHT -> x+=10;
-                case KeyEvent.VK_LEFT -> x-=10;
-            }//위 아래 가능하게
-
-            canvas.repaint(); //paint()를 다시 호출해서 그림 (paint 직접호출 금지)
-            //y축의 최대,최소
-            if(x>=(WIDTH-50)){ //최소
-                //return; //타이머는 계속 실행되지만 콜백함수의 다음 코드는 실행안됨
-                //timer.stop(); //타이머 자체를 멈춤
-                return;
+            for (Block block : blocks){
+                final int MAX_X=WIDTH-block.width; //window 크기에서 블럭크기 제외
+                final int MAX_Y=HEIGHT-block.height-25; //50 : window 제목부분 빼기
+                switch (keyCode){
+                    case KeyEvent.VK_RIGHT :
+                        if(block.x <MAX_X) block.x+=INCREASE;
+                        break;
+                    case KeyEvent.VK_LEFT :
+                        if(block.x > 0) block.x-=INCREASE;
+                        break;
+                    case KeyEvent.VK_UP :
+                        if(block.y > 0) block.y-=INCREASE;
+                        break;
+                    case KeyEvent.VK_DOWN :
+                        if(block.y  < MAX_Y ) block.y+=INCREASE;
+                        break;
+                }
             }
-            //x+=10;
-
+            canvas.repaint(); //paint()를 다시 호출해서 그림 (paint 직접호출 금지)
         });
         timer.start();
         canvas.setFocusable(true);
