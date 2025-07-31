@@ -114,7 +114,7 @@ public class A25MoveBlockCanvas extends JFrame {
         });
         timer.start();
         canvas.setFocusable(true);
-        this.setBounds(-1920,0,WIDTH,HEIGHT);
+        this.setBounds(0,0,WIDTH,HEIGHT);
         this.setVisible(true);
         this.setDefaultCloseOperation(2);
     }
