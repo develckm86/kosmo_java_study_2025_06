@@ -303,19 +303,13 @@ img. : 이미지가 다 불러올때까지 기다렸다가 실행
 
 - Swing은 싱글 스레드 기반이다 (단일 스레드 UI 모델)
 
-Swing은 내부적으로 Event Dispatch Thread(EDT)라는 전용 UI 스레드에서 모든 GUI 이벤트(버튼 클릭, 키 입력, repaint 등)를 처리합니다.
-
-
-
+Swing은 내부적으로 Event Dispatch Thread(EDT,이벤트 리스너)라는 전용 UI 스레드에서 모든 GUI 이벤트(버튼 클릭, 키 입력, repaint 등)를 처리합니다.
 ⸻
-
 - invokeLater()의 핵심 역할
 
 SwingUtilities.invokeLater(Runnable r);
 
 	•	전달한 Runnable 작업을 EDT 큐에 등록하고, 비동기적으로 실행시킵니다.
-	•	즉, “지금 말고 나중에, UI가 한가해졌을 때 안전하게 실행해줘!” 라고 Swing에게 요청하는 방식입니다.
-
 ⸻
 
 - 왜 필요한가? 예시로 이해하기
@@ -361,16 +355,6 @@ canvas.repaint();  // ❌ EDT 외부에서 repaint 호출
 
 SwingUtilities.invokeLater(() -> canvas.repaint());
 
-
-⸻
-
-- invokeLater() vs invokeAndWait() 차이
-
-메서드	실행 방식	설명
-invokeLater()	비동기 실행	지금 말고, 나중에 EDT에서 실행 (non-blocking)
-invokeAndWait()	동기 실행	EDT에서 실행하고 완료될 때까지 기다림 (blocking)
-
-invokeAndWait()는 잘못 사용하면 데드락(deadlock)이 발생할 수 있어 일반적으로 invokeLater()를 더 많이 사용합니다.
 
 ⸻
 */

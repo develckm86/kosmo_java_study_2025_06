@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class A24Canvas extends JFrame {
     //canvas==component
-    MyCanvas canvas=new MyCanvas();
+    MyCanvas canvas;
 
     class MyCanvas extends Canvas {
         Image image;//=Toolkit.getDefaultToolkit().getImage("./강아지.jpeg");
