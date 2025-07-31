@@ -7,19 +7,20 @@ public class S22Canvas {
 - Canvas란?
 
 Canvas는 java.awt.Canvas 클래스로 제공되는 그리기 전용 컴포넌트입니다.
-사용자가 직접 그림(선, 도형, 이미지 등)을 그릴 수 있는 빈 도화지 역할을 하며, paint(Graphics g) 또는 update(Graphics g) 메서드를 오버라이드하여 그립니다.
+사용자가 직접 그림(선, 도형, 이미지 등)을 그릴 수 있는 빈 도화지 역할을 하며,
+ paint(Graphics g) 또는 update(Graphics g) 메서드를 오버라이드하여 그립니다.
 
 ⸻
 
 - Canvas와 일반 컴포넌트(Component)의 차이
 	•	JButton, JLabel 등 일반 컴포넌트
-	•	이미 정의된 UI 기능을 수행 (버튼 클릭, 텍스트 출력 등)
-	•	기본 이벤트 처리 포함
-	•	자동으로 UI 요소가 그려짐
+        •	이미 정의된 UI 기능을 수행 (버튼 클릭, 텍스트 출력 등)
+        •	기본 이벤트 처리 포함
+        •	자동으로 UI 요소가 그려짐
 	•	Canvas
-	•	UI 요소 없이, 그림 그리기 전용
-	•	사용자가 직접 화면을 갱신하거나 다시 그리는 로직을 작성해야 함
-	•	더 자유롭고 낮은 수준의 그래픽 표현 가능
+        •	UI 요소 없이, 그림 그리기 전용
+        •	사용자가 직접 화면을 갱신하거나 다시 그리는 로직을 작성해야 함
+        •	더 자유롭고 낮은 수준의 그래픽 표현 가능
 
 ⸻
 
@@ -264,6 +265,79 @@ class MyCanvas extends Canvas implements Runnable {
     }
 }
 
+자바에서 SwingUtilities.invokeLater()를 사용하는 이유
+**“스윙은 단일 스레드(UI 스레드)에서만 안전하게 동작하기 때문”**입니다.
+
+- Swing은 싱글 스레드 기반이다 (단일 스레드 UI 모델)
+
+Swing은 내부적으로 Event Dispatch Thread(EDT)라는 전용 UI 스레드에서 모든 GUI 이벤트(버튼 클릭, 키 입력, repaint 등)를 처리합니다.
+
+
+
+⸻
+
+- invokeLater()의 핵심 역할
+
+SwingUtilities.invokeLater(Runnable r);
+
+	•	전달한 Runnable 작업을 EDT 큐에 등록하고, 비동기적으로 실행시킵니다.
+	•	즉, “지금 말고 나중에, UI가 한가해졌을 때 안전하게 실행해줘!” 라고 Swing에게 요청하는 방식입니다.
+
+⸻
+
+- 왜 필요한가? 예시로 이해하기
+
+예시 1: main()에서 GUI 생성
+
+public class MyApp {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("직접 생성");  // ❌ 위험할 수 있음
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+
+	•	위 코드는 EDT가 아닌 일반 main 스레드에서 JFrame을 생성함
+	•	실제로 동작할 수도 있지만, 버전/플랫폼에 따라 불안정하거나 예외 발생 가능성 있음
+
+✅ 안전한 코드:
+
+public class MyApp {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("invokeLater 사용");
+            frame.setSize(300, 200);
+            frame.setVisible(true);
+        });
+    }
+}
+
+	•	이 코드는 Runnable 내부의 작업을 EDT에서 실행함 → 완전히 안전
+
+⸻
+
+- invokeLater()와 스레드 충돌 문제 예방
+
+GUI 프로그램에서 백그라운드 작업(예: 네트워크, 타이머, 게임 루프)을 하다가 GUI를 수정하려고 하면 다음처럼 문제가 발생할 수 있음:
+
+// 예: 게임 루프 스레드 내부
+player.setX(player.getX() + 5);
+canvas.repaint();  // ❌ EDT 외부에서 repaint 호출
+
+이럴 땐 반드시 이렇게 호출해야 함:
+
+SwingUtilities.invokeLater(() -> canvas.repaint());
+
+
+⸻
+
+- invokeLater() vs invokeAndWait() 차이
+
+메서드	실행 방식	설명
+invokeLater()	비동기 실행	지금 말고, 나중에 EDT에서 실행 (non-blocking)
+invokeAndWait()	동기 실행	EDT에서 실행하고 완료될 때까지 기다림 (blocking)
+
+invokeAndWait()는 잘못 사용하면 데드락(deadlock)이 발생할 수 있어 일반적으로 invokeLater()를 더 많이 사용합니다.
 
 ⸻
 */
