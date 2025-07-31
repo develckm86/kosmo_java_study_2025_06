@@ -1,6 +1,6 @@
 package com.kosmo.advance.ex;
 
-public class S22Canvas {
+public class S13Canvas {
     /*
 ⸻
 

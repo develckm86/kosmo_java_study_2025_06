@@ -3,7 +3,7 @@ package com.kosmo.advance.ex;
 import javax.swing.*;
 import java.io.IOException;
 
-public class S21GuiChattingClient2 {
+public class S12GuiChattingClient2 {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             S12GuiChattingClient gui = null;
