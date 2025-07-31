@@ -7,8 +7,8 @@ public class S13Canvas {
 - Canvas란?
 
 Canvas는 java.awt.Canvas 클래스로 제공되는 그리기 전용 컴포넌트입니다.
-사용자가 직접 그림(선, 도형, 이미지 등)을 그릴 수 있는 빈 도화지 역할을 하며,
- paint(Graphics g) 또는 update(Graphics g) 메서드를 오버라이드하여 그립니다.
+사용자가 직접 그림(선, 도형, 이미지, 문자열 등)을 그릴 수 있는 빈 도화지 역할을 하며,
+ paint(Graphics g) 메서드를 오버라이드하여 캔버스가 생성될 때 그립니다.
 
 ⸻
 
@@ -43,7 +43,9 @@ public class MyCanvas extends Canvas {
     g.drawLine(int x1, int y1, int x2, int y2)
 
         •	(x1, y1)에서 (x2, y2)까지 직선을 그림.
-        •	예시: g.drawLine(10, 10, 100, 100); → 좌상단에서 우하단으로 대각선
+        •	예시:
+        g.setColor(Color.RED);
+        g.drawLine(10, 10, 100, 100); → 좌상단에서 우하단으로 빨간색 대각선
 
     ⸻
 
@@ -120,8 +122,18 @@ public class MyCanvas extends Canvas {
 
         •	(x, y)는 문자열 베이스라인 기준 (문자 기준선 아래쪽)
         •	예시:
+        Font title=new Font("맑은 고딕",Font.BORD,30)
+        Font content=new Font("맑은 고딕",null,10)
 
-        g.drawString("Hello Canvas!", 50, 250);
+       paint(){
+
+            g.setColor(Color.BLUE)
+            g.setFont(title)
+            g.drawString("Hello Canvas!", 50, 250);
+
+            g.setColor(Color.GREEN)
+            g.setFont(content)
+       }
 
 
 
@@ -135,19 +147,20 @@ public class MyCanvas extends Canvas {
         •	observer는 일반적으로 this 사용 (Canvas 또는 Component)
         •	예시:
 
+        //같은 이미지를 paint()에서 계속 불러오면 안됨!!(필드로 정의)
         Image img = Toolkit.getDefaultToolkit().getImage("player.png");
         g.drawImage(img, 50, 50, this);
 
-        이미지가 너무 빨리 출력되기 전에 paint가 호출될 수 있으므로 MediaTracker 또는 ImageObserver를 활용하여 로딩 상태를 관리해야 정확함.
+        이미지가 비동기적으로 생성되고 paint가 호출될 수 있으므로
+        ImageObserver를 활용하여 로딩 상태를 관리해야 정확함.
 
         mageObserver는 자바에서 **이미지 로딩 상태를 감시(관찰)**하기 위해 사용하는 인터페이스입니다.
-        자바의 drawImage()는 이미지가 **비동기적(Async)**으로 로딩되는 방식이라,
+        자바의 drawImage()는 이미지가 **비동기적(Async == 멀티스레드 )**으로 로딩되는 방식이라,
         아직 이미지가 완전히 메모리에 로드되지 않았을 때도 drawImage()가 호출될 수 있습니다. 이때,
         ImageObserver를 통해 그 진행 상황을 감지하고 업데이트할 수 있습니다.
 
 
     ⸻
-
     - 색상 지정
 
     g.setColor(Color c)
@@ -241,7 +254,7 @@ public class CanvasTest extends JFrame {
 
 - 그림 갱신 시 주의점
 	•	paint(Graphics g)는 OS가 호출
-	•	수동으로 다시 그리려면 repaint() 사용 (내부적으로 update() → paint() 호출됨)
+	•	수동으로 다시 그리려면 **repaint() 사용 (내부적으로 update() → paint() 호출됨)
 	•	부드러운 움직임을 위해 Thread 또는 Timer와 함께 repaint() 사용 가능
 
 ⸻
@@ -264,6 +277,24 @@ class MyCanvas extends Canvas implements Runnable {
         g.fillOval(x, 100, 30, 30); // 공 그리기
     }
 }
+
+- 1. Toolkit vs ImageIcon 차이
+
+Toolkit.getDefaultToolkit().getImage(“경로”)
+	•	운영체제와 연결된 기본 툴킷을 통해 이미지를 불러옵니다.
+	•	비동기 방식: 이미지가 완전히 로드되기 전에 객체가 반환됩니다.
+	•	paint에서 사용할 때 이미지 로딩이 덜 되었을 수 있어 깜빡임이 생기기도 함.
+
+new ImageIcon(“경로”).getImage()
+	•	ImageIcon은 이미지 로딩이 완료된 후 객체를 반환함.
+	•	동기 방식: 로딩이 완료될 때까지 기다렸다가 반환.
+	•	즉, 이미지가 안정적으로 표시되길 원하면 ImageIcon이 더 나음.
+⸻
+- 2. 원본 크기로 출력 vs 줄여서 출력
+    g.drawImage(image, x, y, this);
+        •	이미지가 원본 크기로 그려짐.
+    g.drawImage(image, x, y, width, height, this);
+        •	원하는 크기(width, height)로 축소 또는 확대해서 그림.
 
 자바에서 SwingUtilities.invokeLater()를 사용하는 이유
 **“스윙은 단일 스레드(UI 스레드)에서만 안전하게 동작하기 때문”**입니다.
