@@ -1,0 +1,270 @@
+package com.kosmo.advance.ex;
+
+public class S22Canvas {
+    /*
+⸻
+
+- Canvas란?
+
+Canvas는 java.awt.Canvas 클래스로 제공되는 그리기 전용 컴포넌트입니다.
+사용자가 직접 그림(선, 도형, 이미지 등)을 그릴 수 있는 빈 도화지 역할을 하며, paint(Graphics g) 또는 update(Graphics g) 메서드를 오버라이드하여 그립니다.
+
+⸻
+
+- Canvas와 일반 컴포넌트(Component)의 차이
+	•	JButton, JLabel 등 일반 컴포넌트
+	•	이미 정의된 UI 기능을 수행 (버튼 클릭, 텍스트 출력 등)
+	•	기본 이벤트 처리 포함
+	•	자동으로 UI 요소가 그려짐
+	•	Canvas
+	•	UI 요소 없이, 그림 그리기 전용
+	•	사용자가 직접 화면을 갱신하거나 다시 그리는 로직을 작성해야 함
+	•	더 자유롭고 낮은 수준의 그래픽 표현 가능
+
+⸻
+
+- Canvas 사용법 기본 구조
+
+public class MyCanvas extends Canvas {
+    public void paint(Graphics g) {
+        // 그리기 작업
+        g.drawLine(10, 10, 100, 100);
+    }
+}
+
+
+⸻
+
+    - 주요 그림 그리기 함수 (Graphics 클래스)
+
+    - 선 그리기
+
+    g.drawLine(int x1, int y1, int x2, int y2)
+
+        •	(x1, y1)에서 (x2, y2)까지 직선을 그림.
+        •	예시: g.drawLine(10, 10, 100, 100); → 좌상단에서 우하단으로 대각선
+
+    ⸻
+
+    - 사각형(Rectangle)
+
+    g.drawRect(int x, int y, int width, int height)
+    g.fillRect(int x, int y, int width, int height)
+
+        •	drawRect: 테두리만 있는 사각형
+        •	fillRect: 내부가 채워진 사각형
+        •	(x, y)는 좌측 상단 꼭짓점 위치
+        •	예시:
+
+        g.drawRect(50, 50, 100, 80);
+        g.fillRect(200, 50, 100, 80);
+
+
+
+    ⸻
+
+    - 원/타원(Oval)
+
+    g.drawOval(int x, int y, int width, int height)
+    g.fillOval(int x, int y, int width, int height)
+
+        •	drawOval: 타원의 테두리
+        •	fillOval: 내부 채움
+        •	(x, y)는 외접 사각형의 좌상단, width, height는 타원의 가로, 세로
+        •	width == height이면 원(circle)
+        •	예시:
+
+        g.drawOval(50, 150, 100, 100); // 원
+        g.fillOval(200, 150, 120, 60); // 타원
+
+    ⸻ 호(Arc)를 그리는 함수
+
+    g.drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+    g.fillArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
+        •	타원의 일부분(부채꼴 혹은 호 형태)을 그림
+        •	(x, y)는 외접 사각형의 좌상단
+        •	startAngle: 시작 각도 (0도는 3시 방향, 시계 반대 방향이 양수)
+        •	arcAngle: 호의 크기 (양수는 반시계, 음수는 시계 방향)
+        •	예시:
+
+        g.setColor(Color.BLUE);
+        g.drawArc(50, 50, 100, 100, 0, 90);      // 0도부터 90도까지 그리는 호
+        g.fillArc(200, 50, 100, 100, 90, 180);   // 반원(90도부터 180도)
+
+    ⸻
+
+    - 다각형(Polygon)
+
+    g.drawPolygon(int[] xPoints, int[] yPoints, int nPoints)
+    g.fillPolygon(int[] xPoints, int[] yPoints, int nPoints)
+
+        •	각각의 꼭짓점 좌표를 배열로 전달
+        •	nPoints는 꼭짓점 개수
+        •	예시:
+
+        int[] x = {100, 150, 200};
+        int[] y = {200, 100, 200};
+        g.drawPolygon(x, y, 3); // 삼각형
+
+        g.fillPolygon(x, y, 3); // 내부 채운 삼각형
+
+
+
+    ⸻
+
+    - 문자열 출력
+
+    g.drawString(String str, int x, int y)
+
+        •	(x, y)는 문자열 베이스라인 기준 (문자 기준선 아래쪽)
+        •	예시:
+
+        g.drawString("Hello Canvas!", 50, 250);
+
+
+
+    ⸻
+
+    - 이미지 출력
+
+    g.drawImage(Image img, int x, int y, ImageObserver observer)
+
+        •	이미지를 (x, y)에 출력
+        •	observer는 일반적으로 this 사용 (Canvas 또는 Component)
+        •	예시:
+
+        Image img = Toolkit.getDefaultToolkit().getImage("player.png");
+        g.drawImage(img, 50, 50, this);
+
+        이미지가 너무 빨리 출력되기 전에 paint가 호출될 수 있으므로 MediaTracker 또는 ImageObserver를 활용하여 로딩 상태를 관리해야 정확함.
+
+        mageObserver는 자바에서 **이미지 로딩 상태를 감시(관찰)**하기 위해 사용하는 인터페이스입니다.
+        자바의 drawImage()는 이미지가 **비동기적(Async)**으로 로딩되는 방식이라,
+        아직 이미지가 완전히 메모리에 로드되지 않았을 때도 drawImage()가 호출될 수 있습니다. 이때,
+        ImageObserver를 통해 그 진행 상황을 감지하고 업데이트할 수 있습니다.
+
+
+    ⸻
+
+    - 색상 지정
+
+    g.setColor(Color c)
+
+        •	이후 그리기 동작에 적용될 색상을 설정
+        •	Color 클래스의 상수 사용 또는 RGB 직접 지정
+        •	예시:
+
+        g.setColor(Color.RED); // 미리 정의된 색
+        g.setColor(new Color(100, 200, 255)); // RGB 값 직접 지정
+
+
+
+    ⸻
+
+    - 폰트 변경
+
+    g.setFont(new Font(String name, int style, int size))
+
+        •	그리기 전에 폰트를 설정
+        •	스타일: Font.PLAIN, Font.BOLD, Font.ITALIC
+        •	예시:
+
+        g.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 24));
+        g.drawString("폰트 테스트", 50, 300);
+
+
+
+    ⸻
+
+    - 화면 지우기 (초기화용)
+
+    g.clearRect(int x, int y, int width, int height)
+
+        •	지정한 영역을 배경색으로 덮어서 지움
+        •	애니메이션 등에서 이전 도형을 지우고 새로 그릴 때 사용
+        •	예시:
+
+        g.clearRect(0, 0, getWidth(), getHeight());
+
+
+
+    ⸻
+
+    - 클리핑 영역 설정 (선택 영역 그리기 제한)
+
+    g.setClip(int x, int y, int width, int height)
+    g.getClipBounds() // 현재 클리핑 영역
+
+        •	그리기 영역 제한
+        •	필요 시 특정 영역만 다시 그릴 때 사용
+
+
+
+- Canvas 초기화 및 사용 예
+
+import java.awt.*;
+import javax.swing.*;
+
+public class CanvasTest extends JFrame {
+    public CanvasTest() {
+        setTitle("Canvas 예제");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        MyCanvas canvas = new MyCanvas();
+        add(canvas); // JFrame에 추가
+
+        setVisible(true);
+    }
+
+    class MyCanvas extends Canvas {
+        public void paint(Graphics g) {
+            g.setColor(Color.BLUE);
+            g.drawLine(50, 50, 150, 50);
+            g.drawRect(50, 70, 100, 50);
+            g.setColor(Color.RED);
+            g.fillOval(50, 140, 100, 50);
+            g.setColor(Color.BLACK);
+            g.drawString("Hello Canvas!", 50, 220);
+        }
+    }
+
+    public static void main(String[] args) {
+        new CanvasTest();
+    }
+}
+
+
+⸻
+
+- 그림 갱신 시 주의점
+	•	paint(Graphics g)는 OS가 호출
+	•	수동으로 다시 그리려면 repaint() 사용 (내부적으로 update() → paint() 호출됨)
+	•	부드러운 움직임을 위해 Thread 또는 Timer와 함께 repaint() 사용 가능
+
+⸻
+
+- 실시간 애니메이션을 위한 기본 흐름
+
+class MyCanvas extends Canvas implements Runnable {
+    int x = 0;
+
+    public void run() {
+        while (true) {
+            x += 5;
+            repaint();
+            try { Thread.sleep(50); } catch (InterruptedException e) {}
+        }
+    }
+
+    public void paint(Graphics g) {
+        g.clearRect(0, 0, getWidth(), getHeight()); // 이전 그림 지우기
+        g.fillOval(x, 100, 30, 30); // 공 그리기
+    }
+}
+
+
+⸻
+*/
+}

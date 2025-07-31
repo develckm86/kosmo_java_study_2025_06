@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class S09ChattingClient {
     public static void main(String[] args) {
-        //내컴퓨터 내부 : localhost == 192.0.0.1
+        //내컴퓨터 내부 : localhost == 127.0.0.1
         try (Socket socket =new Socket("localhost",8888);
             PrintWriter out=new PrintWriter(socket.getOutputStream(),true); //연결된 소켓으로 서버에 문자열 데이터를 보내는 객체
             Scanner in=new Scanner(socket.getInputStream());){

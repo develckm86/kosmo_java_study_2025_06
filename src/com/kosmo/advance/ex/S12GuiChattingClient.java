@@ -76,8 +76,8 @@ public class S12GuiChattingClient extends JFrame {
         setTitle("단체 채팅방");
         this.userName=userName;
         //서버와 소켓 생성 후 채팅방 반들기
-//        socket=new Socket("127.0.0.1",9999);
-        socket=new Socket("192.168.0.65",9999);
+        socket=new Socket("127.0.0.1",9999);
+//        socket=new Socket("192.168.0.65",9999);
         out = new PrintWriter(socket.getOutputStream(),true); //서버와 연결된 출력 객체
         out.flush();
         in = new Scanner(socket.getInputStream());//서버와 연결된 입력 객체
